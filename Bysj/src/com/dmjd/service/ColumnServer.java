@@ -92,4 +92,16 @@ public class ColumnServer implements ColumnDao {
 	}
 
 
+	@Override
+	public ArrayList<Column> initColumn(int cid, int kid) throws Exception {
+		ArrayList<Column> columns = new ArrayList<>();
+		try {
+			columns = this.dao.initColumn(cid,kid);
+		} catch (Exception e) {
+			throw e;
+		}
+		return columns;
+	}
+
+
 }

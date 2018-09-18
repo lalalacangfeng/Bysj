@@ -21,6 +21,9 @@ public interface ColumnDao {
 	//显示栏目or动漫标签
 	public Column showColumn(int cid,int kid) throws Exception;
 	
+	//初始化栏目or动漫标签
+	public ArrayList<Column> initColumn(int cid,int kid) throws Exception;
+	
 	//修改栏目or动漫标签
 	public int editColumn(int cid,int kid,Column column) throws Exception;
 }

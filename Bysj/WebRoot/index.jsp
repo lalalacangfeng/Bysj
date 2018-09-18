@@ -122,9 +122,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         <a href="#"><i class="fa fa-cutlery"></i> 
                         <span class="nav-label">栏目管理</span><span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
-                            <li><a class="J_menuItem" href="">添加栏目</a>
+                            <li><a class="J_menuItem" href="column?action=init">添加栏目</a>
                             </li>
-                            <li><a class="J_menuItem" href="">栏目列表</a>
+                            <li><a class="J_menuItem" href="column?action=findall">栏目列表</a>
                             </li>
                         </ul>
                     </li>
@@ -168,7 +168,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 </nav>
             </div>
             <div class="row J_mainContent" id="content-main">
-                <iframe id="J_iframe" width="100%" height="100%" src="index_v1.html?v=4.0" frameborder="0" data-id="index_v1.html" seamless></iframe>
+                <iframe id="J_iframe" width="100%" height="100%" src="" frameborder="0" data-id="" seamless></iframe>
             </div>
         </div>        
      	<!--右侧部分结束-->        

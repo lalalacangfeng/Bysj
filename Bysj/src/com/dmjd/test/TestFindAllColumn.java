@@ -14,7 +14,7 @@ public class TestFindAllColumn {
 		System.out.println("---TestFindAllColumn----");
 		ArrayList<Column> columns = new ArrayList<>();
 		try {
-			columns = DaoFactory.getColumnDaoInstance().findAllColumns();
+			columns = DaoFactory.getColumnDaoInstance().findDmColumns();
 			System.out.println("success");
 			for (Column column : columns) {
 				System.out.println(column.toString());

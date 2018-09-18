@@ -24,7 +24,7 @@ public class ArticleDaoImpl implements ArticleDao {
 	@Override
 	public ArrayList<Column> initColumn() throws Exception {
 		ArrayList<Column> columns = new ArrayList<>();
-		String sql = "select * from class";
+		String sql = "select * from class where kid<=2";
 		pstmt = this.con.prepareStatement(sql);
 		rs = pstmt.executeQuery();
 		while(rs.next()){

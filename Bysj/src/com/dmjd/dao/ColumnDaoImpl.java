@@ -70,27 +70,24 @@ public class ColumnDaoImpl implements ColumnDao {
 		String sql = null;
 		if (column.getCid()==0 && column.getClassname()==null) {
 			//添加栏目为一级
-			sql = "insert into kind(kid,kindname) values(?,?)";
+			sql = "insert into kind(kindname) values(?)";
 			pstmt = this.con.prepareStatement(sql);
-			pstmt.setInt(1, column.getKid());
-			pstmt.setString(2, column.getKindname());
+			pstmt.setString(1, column.getKindname());
 			result = pstmt.executeUpdate();
 			System.out.println("添加一级栏目成功");
-		} else if (column.getKid()==4) {
+		} else if (column.getKid()==4 && column.getClassname()!=null) {
 			//添加栏目为动漫标签
-			sql = "insert into class(cid,classname,kid) values(?,?,4)";
+			sql = "insert into class(classname,kid) values(?,4)";
 			pstmt = this.con.prepareStatement(sql);
-			pstmt.setInt(1, column.getCid());
-			pstmt.setString(2, column.getClassname());
+			pstmt.setString(1, column.getClassname());
 			result = pstmt.executeUpdate();
 			System.out.println("添加动漫标签成功");
 		} else if (column.getKid()<=2) {
 			//添加栏目为二级
-			sql = "insert into class(cid,classname,kid) values(?,?,?)";
+			sql = "insert into class(classname,kid) values(?,?)";
 			pstmt = this.con.prepareStatement(sql);
-			pstmt.setInt(1, column.getCid());
-			pstmt.setString(2, column.getClassname());
-			pstmt.setInt(3, column.getKid());
+			pstmt.setString(1, column.getClassname());
+			pstmt.setInt(2, column.getKid());
 			result = pstmt.executeUpdate();
 			System.out.println("添加二级栏目成功");
 		} else {
@@ -213,5 +210,55 @@ public class ColumnDaoImpl implements ColumnDao {
 		}
 		pstmt.close();
 		return result;
+	}
+
+	@Override
+	public ArrayList<Column> initColumn(int cid, int kid) throws Exception {
+		ArrayList<Column> columns = new ArrayList<>();
+		String sql = null;
+		if(cid==0&kid>0) {
+			//显示一级
+			sql = "select * from kind";
+			pstmt = this.con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				Column column = new Column();
+				column.setKid(rs.getInt(1));
+				column.setKindname(rs.getString(2));
+				columns.add(column);
+				System.out.println("显示1");
+			}
+		}else if (cid!=0&&kid<=2) {
+			//显示二级标签
+			sql = "select * from class join kind on class.kid=kind.kid where class.kid<=2";
+			pstmt = this.con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			while(rs.next()){
+				Column column = new Column();
+				column.setCid(rs.getInt(1));
+				column.setClassname(rs.getString(2));
+				column.setKid(rs.getInt(3));
+				column.setKindname(rs.getString(5));
+				columns.add(column);
+				System.out.println("显示2");
+			}
+		}else if(cid!=0&&kid==4){
+			//显示动漫标签
+			sql = "select * from class join kind on class.kid=kind.kid where class.kid=4";
+			pstmt = this.con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				Column column = new Column();
+				column.setCid(rs.getInt(1));
+				column.setClassname(rs.getString(2));
+				column.setKid(rs.getInt(3));
+				column.setKindname(rs.getString(5));
+				columns.add(column);
+				System.out.println("显示3");
+			}
+		}
+		rs.close();
+		pstmt.close();
+		return columns;
 	}
 }

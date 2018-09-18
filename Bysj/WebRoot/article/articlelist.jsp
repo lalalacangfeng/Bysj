@@ -50,8 +50,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	                            <th>操作</th>
                            	</tr>
                         </thead>
-                   	<c:forEach items="${articleList }" var="article">
                         <tbody>
+	                   	<c:forEach items="${articleList }" var="article">
                         	<tr class="gradeX">
 	                            <td> <c:out value="${article.nid}"/></td>
 	                            <td><a href="article?action=article&nid=${article.nid}"><c:out value="${article.articletitle}"/></a></td>
@@ -70,8 +70,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	                            <td><a href="article?action=edit&nid=${article.nid}"><i class="fa fa-circle-o-notch"> 编辑</i></a> 
 	                            <a href="article?action=delete&nid=${article.nid}"><i class="fa fa-close"> 删除</a></td>
                             </tr>
+	                   	</c:forEach>
                         </tbody>
-                   	</c:forEach>
 						<tfoot>
                         	<tr>
 	                            <th>文章编号</th>
