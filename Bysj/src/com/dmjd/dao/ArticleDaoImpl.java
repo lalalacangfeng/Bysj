@@ -154,6 +154,7 @@ public class ArticleDaoImpl implements ArticleDao {
 			article.setReleasetime(rs.getString(9));
 			article.setStatus(rs.getInt(10));
 			article.setCid(rs.getInt(11));
+			article.setClassname(rs.getString(13));
 			articleList.add(article);
 		}
 		rs.close();

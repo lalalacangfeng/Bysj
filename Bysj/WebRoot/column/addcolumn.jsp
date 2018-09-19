@@ -27,14 +27,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-    <form id="releasearticle" action="article" method="post">
+    <form id="columns" action="column" method="post">
     	<div class="wrapper wrapper-content animated fadeInRight">
 			<div class="ibox float-e-margins">
 				<div class="col-md-12">    
 			        <label class="col-sm-3 control-label">类别：</label>
 			        <div class="col-sm-9">
 			            <label class="radio-inline">
-			                <input type="radio" value="0" id="optionsRadios1" name="optionsRadios">一级栏目</label>
+			                <input type="radio" value="0" checked="checked" id="optionsRadios1" name="optionsRadios">一级栏目</label>
 			            <label class="radio-inline">
 			                <input type="radio" value="100" id="optionsRadios2" name="optionsRadios">二级栏目</label>
 			            <label class="radio-inline">
@@ -46,7 +46,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			        <div class="col-sm-9">
 			            <select class="form-control" name="classname">
 			            	<c:forEach items="${columns }" var="column">
-		            			<option name="${column.cid }" value="${column.cid }">${column.classname }</option>
+		            			<option name="${column.kid }" value="${column.kid }">${column.kindname }</option>
 			            	</c:forEach>
 			            </select>
 			        </div>
@@ -54,7 +54,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			        <div class="col-sm-9">
 			            <input type="text" name="inputname" class="form-control" placeholder="请输入文本">
 			        </div>
-					<input type="submit" name="" class="btn btn-w-m btn-success" value="添加" >
+					<input type="submit" name="action" class="btn btn-w-m btn-success" value="添加" >
 				</div>
 			</div>
 		</div>

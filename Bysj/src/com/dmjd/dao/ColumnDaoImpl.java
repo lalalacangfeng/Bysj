@@ -217,8 +217,8 @@ public class ColumnDaoImpl implements ColumnDao {
 		ArrayList<Column> columns = new ArrayList<>();
 		String sql = null;
 		if(cid==0&kid>0) {
-			//显示一级
-			sql = "select * from kind";
+			//显示一级栏目
+			sql = "select * from kind  where kid<=2";
 			pstmt = this.con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {

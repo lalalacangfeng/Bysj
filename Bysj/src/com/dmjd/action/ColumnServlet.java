@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.dmjd.action.column.AddColumnAction;
+import com.dmjd.action.column.DelColumnAction;
 import com.dmjd.action.column.FindAllColumnAction;
 import com.dmjd.action.column.InitStColumnAction;
 
@@ -43,8 +44,15 @@ public class ColumnServlet extends HttpServlet {
 		}else if (action.equals("init")) {
 			targetAction = new InitStColumnAction();
 			path = targetAction.execute(request, response);
-		}else if (action.equals("add")) {
+		}else if (action.equals("添加")) {
 			targetAction = new AddColumnAction();
+			path = targetAction.execute(request, response);
+		}else if (action.equals("edit")) {
+			System.out.println("进入修改页面");
+			targetAction = new InitStColumnAction();
+			path = targetAction.execute(request, response);
+		}else if(action.equals("del")) {
+			targetAction = new DelColumnAction();
 			path = targetAction.execute(request, response);
 		}
 		request.getRequestDispatcher(path).forward(request, response);

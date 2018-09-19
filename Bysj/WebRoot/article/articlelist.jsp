@@ -57,7 +57,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	                            <td><a href="article?action=article&nid=${article.nid}"><c:out value="${article.articletitle}"/></a></td>
 	                            <td><c:out value="${article.releasetime}"/></td>
 	                            <td class="center"><c:out value="${article.articlewriter}"/></td>
-	                            <td class="center"><c:out value="${article.cid}"/></td>
+	                            <td class="center"><c:out value="${article.classname} (${article.cid}) "/></td>
 	                            <td>
 	                            <c:if test="${article.status ==0}">
 	                            	<a href="article?action=release&nid=${article.nid}"> 发布</a>

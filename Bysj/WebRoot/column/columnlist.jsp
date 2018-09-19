@@ -92,8 +92,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         				</c:choose>
 										</td>
 										<td>
-										<a href=""><i class="fa fa-circle-o-notch"> 编辑</i></a>
-										<a href=""><i class="fa fa-close"> 删除</a>
+										<c:choose>
+	                        					<c:when test="${column.cid ==0 }">
+	                        					<a href="column?action=edit&cid=0&kid=${column.kid}"><i class="fa fa-circle-o-notch"> 编辑</i></a>
+												<a href="column?action=del&cid=0&kid=${column.kid}"><i class="fa fa-close"> 删除</a>
+	                        					</c:when>
+	                        					<c:otherwise>
+		                        					<a href="column?action=edit&cid=${column.cid}&kid=${column.kid}"><i class="fa fa-circle-o-notch"> 编辑</i></a>
+													<a href="column?action=del&cid=${column.cid}&kid=${column.kid}"><i class="fa fa-close"> 删除</a>
+	                        					</c:otherwise>
+                        				</c:choose>
 										</td> 
                        			</tr>
 		  						</c:forEach>

@@ -18,20 +18,25 @@ public class AddColumnAction implements Action {
 		Column column = new Column();
 		try {
 			int optionsRadios = Integer.parseInt(request.getParameter("optionsRadios"));
+			System.out.println("optionsRadios的值为："+optionsRadios);
 			if (optionsRadios==0) {
 				String kindname = request.getParameter("inputname");
+				System.out.println("inputname:"+kindname);
 				if (kindname!=null) {
 					column.setKindname(kindname);
 				}
 			}else if (optionsRadios == 100) {
 				String classname = request.getParameter("inputname");
+				System.out.println("inputname:"+classname);
 				int kid = Integer.parseInt(request.getParameter("classname"));
+				System.out.println("所属栏目ID为："+kid);
 				if (classname!=null && kid>0) {
 					column.setKid(kid);
 					column.setClassname(classname);
 				}			
 			}else if(optionsRadios == 4) {
 				String classname = request.getParameter("inputname");
+				System.out.println("inputname:"+classname);
 				if (classname!=null) {
 					column.setClassname(classname);
 					column.setKid(4);
@@ -48,7 +53,7 @@ public class AddColumnAction implements Action {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "column/columnlist.jsp";
+		return "column?action=findall";
 	}
 
 }

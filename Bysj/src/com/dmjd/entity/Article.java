@@ -11,6 +11,14 @@ public class Article implements Serializable {
 	private String articlewriter;
 	private String from;// 来源
 	private int hits;// 点击数
+	private String articlecontent;// 内容
+	private int greats;// 点赞
+	private int layers;// 优先级
+	private String releasetime;// 发布时间
+	private int cid;
+	private int status;
+	private String classname;
+	private Set<Answer> answers;
 	
 	
 	public Set<Answer> getAnswers() {
@@ -21,13 +29,6 @@ public class Article implements Serializable {
 		this.answers = answers;
 	}
 
-	private String articlecontent;// 内容
-	private int greats;// 点赞
-	private int layers;// 优先级
-	private String releasetime;// 发布时间
-	private int cid;
-	private int status;
-	private Set<Answer> answers;
 
 	public Set<Answer> getanswers() {
 		return answers;
@@ -145,6 +146,14 @@ public class Article implements Serializable {
 
 	public void setStatus(int status) {
 		this.status = status;
+	}
+
+	public String getClassname() {
+		return classname;
+	}
+
+	public void setClassname(String classname) {
+		this.classname = classname;
 	}
 
 	
