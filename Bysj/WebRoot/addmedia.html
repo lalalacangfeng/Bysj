@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>addmedia.html</title>
+	
+    <meta name="keywords" content="keyword1,keyword2,keyword3">
+    <meta name="description" content="this is my page">
+    <meta name="content-type" content="text/html; charset=UTF-8">
+    
+    <!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+	<link rel="shortcut icon" href="favicon.ico"> 
+    <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
+	<link href="css/style.css?v=4.1.0" rel="stylesheet">
+ 
+  </head>
+  
+  <body>
+	
+	<form id="uploadmedia" action="media" method="post">
+		<div class="wrapper wrapper-content animated fadeInRight">
+			<div class="ibox float-e-margins">
+				<ul class="forminfo">
+					<li>
+						<label class="col-sm-3 control-label">视频名称：</label>
+						<input type="text" id="name" name="name" required="required" 
+					    class="form-control" value="${media.name }" placeholder="请输入视频标题">
+					    <br>
+					</li>
+					<li>
+						<label class="col-sm-3 control-label">视频描述：</label>
+						<input type="text" id="descript" name="descript" required="required" 
+					    class="form-control" value="${media.descript }" placeholder="请输入视频描述">
+					    <br>
+					</li>
+					<li>
+						<label class="col-sm-3 control-label">上传资源</label>
+						<input type="file" id="file" name="file" 
+					    class="form-control">
+					    <br>
+					</li>
+					<li>
+						<label>&nbsp;</label>
+						 <input type="button" onclick="test()" value="上传" />  
+						<br>
+					</li>
+               </ul>
+        	</div>
+    	</div>
+   </form>
+	
+	<!-- 全局js -->
+    <script src="js/jquery.min.js?v=2.1.4"></script>
+    <script src="js/bootstrap.min.js?v=3.3.6"></script>
+    
+    
+    
+    
+    <!-- 
+	<script>  
+	    function test(){ 
+		alert("11！");  
+		var form = new FormData(document.getElementById("uploadmedia"));
+		$.ajax({
+			url:"/uploadmedia",
+			type:"post",
+			dataType:"jsonp",
+			data:form,
+			cache:false,
+			processData:false,
+			contentType: false,  
+			success:function(data){  
+				alert("操作成功！");  
+			},  
+			error:function(e){  
+				alert("网络错误，请重试！！");  
+			}  
+		});
+	})
+	</script> 
+     -->
+  </body>
+</html>
