@@ -44,7 +44,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<input type="password" id="password" name="password"
 				class="form-control pword m-b" placeholder="密码" />
 				<input type="hidden" name="action" value="dologin">
-				<button class="btn btn-success btn-block">登录</button>
+				<button class="btn btn-success btn-block" onclick="dologin()">登录</button>
 			</form>
 		</div>
 	</div>
@@ -54,4 +54,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</div>
 	</div>
   </body>
+  
+   	<!-- 全局js -->
+    <script src="js/jquery.min.js?v=2.1.4"></script>
+    <script src="js/bootstrap.min.js?v=3.3.6"></script>
+    <script type="text/javascript" src="js/user/dologin.js"></script>  
 </html>

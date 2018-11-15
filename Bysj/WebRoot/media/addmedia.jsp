@@ -25,11 +25,10 @@ System.out.println("path:"+path+"      basePath:"+basePath);
     <link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
     <link href="css/animate.css" rel="stylesheet">
 	<link href="css/style.css?v=4.1.0" rel="stylesheet">
-
+	
   </head>
   
   <body>
-   
     <form id="uploadmedia" name="uploadmedia" action="media" 
     encType="multipart/form-data" method="post">
 		<div class="wrapper wrapper-content animated fadeInRight">
@@ -48,14 +47,15 @@ System.out.println("path:"+path+"      basePath:"+basePath);
 					    <br>
 					</li>
 					<li>
-						<label class="col-sm-3 control-label">上传资源</label>
+						<label class="col-sm-3 control-label">上传资源&nbsp;&nbsp;(暂时只支持asx，asf，mpg，wmv，3gp，mp4，mov，avi，flv等格式文件) </label>
 						<input type="file" id="file" name="file" 
 					    class="form-control">
 					    <br>
 					</li>
 					<li>
 						<label>&nbsp;</label>
-						<input id="upload" name="upload" onclick="test()" type="button" class="btn" value="提交"/>
+						<input id="upload" name="upload" onclick="test()"
+						type="button" class="btn" value="提交"/>
 						<br>
 					</li>
                </ul>

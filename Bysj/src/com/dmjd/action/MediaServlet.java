@@ -21,10 +21,10 @@ import com.dmjd.entity.Media;
 import com.dmjd.factory.DaoFactory;
 
 
-@WebServlet(
-		urlPatterns = { "/media" },
-		name = "mediaServlet"
-)
+//@WebServlet(
+//		urlPatterns = { "/media/*" },
+//		name = "mediaServlet"
+//)
 public class MediaServlet extends HttpServlet {
 
 	public MediaServlet(){
@@ -42,7 +42,7 @@ public class MediaServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		System.out.println("测试测试测试测试测试测试测试测试测试测试");
-		PrintWriter out = response.getWriter();
+//		PrintWriter out = response.getWriter();
 		String uri = request.getRequestURI();
 		System.out.println("uri:"+uri);
 		String uripath = uri.substring(uri.lastIndexOf("/"));
@@ -55,9 +55,13 @@ public class MediaServlet extends HttpServlet {
 			System.out.println("----上传测试----"+uripath);
 			targetAction = new UploadFileAction();
 			path = targetAction.execute(request, response);
+		}else {
+			path = "/index.jsp";
+//			response.sendRedirect(request.getContextPath() + path);
+
 		}
-		
 		request.getRequestDispatcher(path).forward(request, response);
+		
 		
 	}
 

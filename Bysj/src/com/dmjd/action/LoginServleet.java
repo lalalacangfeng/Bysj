@@ -48,6 +48,8 @@ public class LoginServleet extends HttpServlet {
 		String action = request.getParameter("action");//获取action类型
 		String path = null;
 		System.out.println("action:"+action);
+		PrintWriter out = response.getWriter();//获取writer方法，用于将数据返回给ajax
+		
 		try {
 			if (action.equals("dologin")) {
 				User user= DaoFactory.getUserDaoInstance().queryByName(username);
@@ -58,12 +60,15 @@ public class LoginServleet extends HttpServlet {
 					//request.getSession().setAttribute("email", user.getEmail());
 					if (user.getRole()!=0) {
 						request.setAttribute("status", "暂无权限！");
+						
 						path = "login.jsp";
 					}else {
+						
 						path = "index.jsp";					
 					}
 				}else {
 					request.setAttribute("status", "用户名或密码错误！");
+					
 					path = "login.jsp";
 				}
 			}else if (action.equals("logout")) {
@@ -74,7 +79,8 @@ public class LoginServleet extends HttpServlet {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		request.getRequestDispatcher(path).forward(request, response);
+		out.flush();out.close();
+		//request.getRequestDispatcher(path).forward(request, response);
 	}
 
 	/**

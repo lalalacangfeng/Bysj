@@ -78,7 +78,7 @@ public class UploadFileAction implements Action {
 					media.setSrc("videos/"+serialName+".flv");
 					media.setPicture("videos/images/"+serialName+".jpg");
 					
-					//转码
+//					转码
 					flag = DaoFactory.getMediaDaoInstance().executeCodecs(ffmpegPath, uploadFile.getAbsolutePath(), codcFilePath, mediaPicPath);
 				}
 			}

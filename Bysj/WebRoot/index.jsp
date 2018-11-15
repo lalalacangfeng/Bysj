@@ -112,7 +112,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         <a href="#"><i class="fa fa-magic"></i> 
                         <span class="nav-label">影音管理</span><span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
-                            <li><a class="J_menuItem" href="">视频发布</a>
+                            <li><a class="J_menuItem" href="media/addmedia.jsp">视频发布</a>
                             </li>
                             <li><a class="J_menuItem" href="">视频</a>
                             </li>
