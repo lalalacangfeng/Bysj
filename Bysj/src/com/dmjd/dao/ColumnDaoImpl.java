@@ -9,84 +9,67 @@ import com.dmjd.entity.Column;
 
 public class ColumnDaoImpl implements ColumnDao {
 
-	private Connection con = null;
-	private PreparedStatement pstmt = null;
-	ResultSet rs = null;
+	private Connection con = null;//连接语句
+	private PreparedStatement pstmt = null;//数据集
+	ResultSet rs = null;//查询结果集
 	
+	//构造方法中实例化数据库连接
 	public ColumnDaoImpl(Connection con){
 		this.con = con;
 	}
 	
+	/***
+	 * 查询所有一级栏目
+	 */
 	@Override
 	public ArrayList<Column> findAllColumns() throws Exception {
-		ArrayList<Column> columns = new ArrayList<>();
-		String sql = "select * from kind;";
+		ArrayList<Column> columns = new ArrayList<>();//栏目集
+		String sql = "select * from kind;";//查询语句---查询一级栏目种类表kind中所有字段
 		pstmt = this.con.prepareStatement(sql);
 		rs = this.pstmt.executeQuery();
-		while (rs.next()) {
-			Column column = new Column();
-			column.setKid(rs.getInt(1));
-			column.setKindname(rs.getString(2));
-			columns.add(column);
+		while (rs.next()) {//遍历结果集
+			Column column = new Column();//新建一个栏目对象
+			column.setKid(rs.getInt(1));//保存种类编号
+			column.setKindname(rs.getString(2));//保存种类名称
+			column.setPid(rs.getInt(3));//保存等级标识
+			columns.add(column);//将一级栏目添加到栏目集中
 		}
-		sql = "select * from class join kind on class.kid=kind.kid having class.kid<=2;";
+		sql = "select cid,columnname,`column`.pid,`column`.kid,kindname from `column` "
+				+ "join kind on `column`.kid=kind.kid;";//查询语句---查询二级栏目及其所属上级栏目
 		pstmt = this.con.prepareStatement(sql);
 		rs = this.pstmt.executeQuery();
-		while (rs.next()) {
-			Column column = new Column();
+		while (rs.next()) {//遍历结果集
+			Column column = new Column();//新建一个栏目对象
 			column.setCid(rs.getInt(1));
-			column.setClassname(rs.getString(2));
+			column.setColumnname(rs.getString(2));
+			column.setPid(rs.getInt(3));//保存等级标识
 			column.setKid(rs.getInt(4));
 			column.setKindname(rs.getString(5));
-			columns.add(column);
+			columns.add(column);//将二级栏目添加到栏目集中
 		}
 		rs.close();
 		pstmt.close();
 		return columns;
 	}
 
-	@Override
-	public ArrayList<Column> findDmColumns() throws Exception {
-		ArrayList<Column> columns = new ArrayList<>();
-		String sql = "select * from class join kind on class.kid=kind.kid having class.kid=4";
-		pstmt = this.con.prepareStatement(sql);
-		rs = pstmt.executeQuery();
-		while (rs.next()) {
-			Column column = new Column();
-			column.setCid(rs.getInt(1));
-			column.setClassname(rs.getString(2));
-			column.setKid(rs.getInt(4));
-			column.setKindname(rs.getString(5));
-			columns.add(column);
-		}
-		rs.close();
-		pstmt.close();
-		return columns;
-	}
 
+	/***
+	 * 添加一二级栏目
+	 */
 	@Override
 	public int addColumn(Column column) throws Exception {
 		int result = 0;
 		String sql = null;
-		if (column.getCid()==0 && column.getClassname()==null) {
-			//添加栏目为一级
-			sql = "insert into kind(kindname) values(?)";
+		if (column.getCid()==0 && column.getColumnname()==null && column.getPid() == 1) {//添加栏目为一级
+			sql = "insert into kind(kindname) values(?)";//向kind表中插入一级栏目名称
 			pstmt = this.con.prepareStatement(sql);
 			pstmt.setString(1, column.getKindname());
 			result = pstmt.executeUpdate();
 			System.out.println("添加一级栏目成功");
-		} else if (column.getKid()==4 && column.getClassname()!=null) {
-			//添加栏目为动漫标签
-			sql = "insert into class(classname,kid) values(?,4)";
+		} else if (column.getPid() == 2) {//添加栏目为二级
+			sql = "insert into `column`(columnname,kid) values(?,?)";//向column表中插入二级栏目名称及所属上级栏目标识
 			pstmt = this.con.prepareStatement(sql);
-			pstmt.setString(1, column.getClassname());
-			result = pstmt.executeUpdate();
-			System.out.println("添加动漫标签成功");
-		} else if (column.getKid()<=2) {
-			//添加栏目为二级
-			sql = "insert into class(classname,kid) values(?,?)";
-			pstmt = this.con.prepareStatement(sql);
-			pstmt.setString(1, column.getClassname());
+			pstmt.setString(1, column.getColumnname());
 			pstmt.setInt(2, column.getKid());
 			result = pstmt.executeUpdate();
 			System.out.println("添加二级栏目成功");
@@ -97,168 +80,110 @@ public class ColumnDaoImpl implements ColumnDao {
 		return result;
 	}
 
+	/***
+	 * 删除栏目
+	 */
 	@Override
-	public int delColumn(int cid,int kid) throws Exception {
+	public int delColumn(int id,int pid) throws Exception {
 		int result = 0;
 		String sql = null;
-		if(cid==0&kid>0) {
-			//还有问题，联表删除
+		switch (pid) {//判断栏目等级：1--一级栏目；2--二级栏目
+		case 1:
 			//删除一级栏目
-			sql = "delete from kind where kid=?";
+			sql = "delete from kind where kid=?";//通过一级标识删除kind表中的一级栏目---其下所属栏目也会被删除
 			pstmt = this.con.prepareStatement(sql);
-			pstmt.setInt(1, kid);
+			pstmt.setInt(1, id);
 			result = pstmt.executeUpdate();
 			System.out.println("删除一级成功");
-		}else if (cid!=0&&kid<=2) {
+			break;
+		case 2:
 			//删除二级标签
-			sql = "delete from class where cid=?";
+			sql = "delete from `column` where cid=?";//通过二级标识删除column表中的二级栏目
 			pstmt = this.con.prepareStatement(sql);
-			pstmt.setInt(1, cid);
+			pstmt.setInt(1, id);
 			result = pstmt.executeUpdate();
 			System.out.println("删除二级成功");
-		} else if (cid!=0&&kid==4) {
-			//删除动漫标签
-			sql = "delete from class where cid=? and kid=?";
-			pstmt = this.con.prepareStatement(sql);
-			pstmt.setInt(1, cid);
-			pstmt.setInt(2, kid);
-			result = pstmt.executeUpdate();
-			System.out.println("删除动漫标签成功");
-		} else {
+			break;
+		default:
 			System.out.println("删除失败");
+			break;
 		}
 		pstmt.close();			
 		return result;
 	}
 
+	/***
+	 * 显示修改栏目
+	 */
 	@Override
-	public Column showColumn(int cid, int kid) throws Exception {
+	public Column showColumn(int id, int pid) throws Exception {
+		// TODO Auto-generated method stub
 		Column column = new Column();
 		String sql = null;
-		if(cid==0&kid>0) {
-			//显示一级
-			sql = "select * from kind where kid=?";
+		switch (pid) {//判断栏目等级：1--一级栏目；2--二级栏目
+		case 1:
+			sql = "select * from kind where kid=?";//通过id查询kind
 			pstmt = this.con.prepareStatement(sql);
-			pstmt.setInt(1, kid);
+			pstmt.setInt(1, id);
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
 				column.setKid(rs.getInt(1));
 				column.setKindname(rs.getString(2));
-				System.out.println("显示1");
+				column.setPid(rs.getInt(3));
 			}
-		}else if (cid!=0&&kid<=2) {
-			//显示二级标签
-			sql = "select * from class join kind on class.kid=kind.kid where class.cid=?";
+			break;
+		case 2:
+			sql = "select * from `column` left join kind on `column`.kid=kind.kid where `column`.cid=?";//通过id查询column
 			pstmt = this.con.prepareStatement(sql);
-			pstmt.setInt(1, cid);
-			rs = pstmt.executeQuery();
-			if(rs.next()){
-				column.setCid(rs.getInt(1));
-				column.setClassname(rs.getString(2));
-				column.setKid(rs.getInt(3));
-				column.setKindname(rs.getString(5));
-				System.out.println("显示2");
-			}
-		}else if(cid!=0&&kid==4){
-			//显示动漫标签
-			sql = "select * from class join kind on class.kid=kind.kid where class.cid=? and class.kid=?";
-			pstmt = this.con.prepareStatement(sql);
-			pstmt.setInt(1, cid);
-			pstmt.setInt(2, kid);
+			pstmt.setInt(1, id);
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
 				column.setCid(rs.getInt(1));
-				column.setClassname(rs.getString(2));
-				column.setKid(rs.getInt(3));
-				column.setKindname(rs.getString(5));
-				System.out.println("显示3");
+				column.setColumnname(rs.getString(2));
+				column.setPid(rs.getInt(3));
+				column.setKid(rs.getInt(4));
+				column.setKindname(rs.getString(6));
 			}
+			break;
+		default:
+			System.out.println("出错失败了");
+			break;
 		}
 		rs.close();
 		pstmt.close();
 		return column;
 	}
 
+	/**
+	 * 修改--待做
+	 */
 	@Override
-	public int editColumn(int cid, int kid,Column column) throws Exception {
-		int result =0;
+	public int editColumn(int id,Column column) throws Exception {
+		int result = 0;
 		String sql = null;
-		if(cid==0&kid>0) {
-			//修改一级
+		int pid = column.getPid();
+		switch (pid) {
+		case 1:
 			sql = "update kind set kindname=? where kid=?";
 			pstmt = this.con.prepareStatement(sql);
 			pstmt.setString(1, column.getKindname());
-			pstmt.setInt(2, kid);
-			result = pstmt.executeUpdate();
-			System.out.println("修改1成功");
-		}else if (cid!=0&&kid<=2) {
-			sql = "update kind set classname=?,kid=? where cid=?";
-			pstmt = this.con.prepareStatement(sql);
-			pstmt.setString(1, column.getClassname());
 			pstmt.setInt(2, column.getKid());
-			pstmt.setInt(3, cid);
 			result = pstmt.executeUpdate();
-			System.out.println("修改2成功");
-		}else if(cid!=0&&kid==4){
-			sql = "update kind set classname=?,kid=? where kid=?";
+			break;
+		case 2:
+			sql = "update `column` set columnname=?,kid=? where cid=?";
 			pstmt = this.con.prepareStatement(sql);
-			pstmt.setString(1, column.getClassname());
+			pstmt.setString(1, column.getColumnname());
 			pstmt.setInt(2, column.getKid());
-			pstmt.setInt(3, kid);
+			pstmt.setInt(3, column.getCid());
 			result = pstmt.executeUpdate();
-			System.out.println("修改3成功");
+			break;
+		default:
+			System.out.println("update出错了");
+			break;
 		}
 		pstmt.close();
 		return result;
 	}
 
-	@Override
-	public ArrayList<Column> initColumn(int cid, int kid) throws Exception {
-		ArrayList<Column> columns = new ArrayList<>();
-		String sql = null;
-		if(cid==0&kid>0) {
-			//显示一级栏目
-			sql = "select * from kind  where kid<=2";
-			pstmt = this.con.prepareStatement(sql);
-			rs = pstmt.executeQuery();
-			while (rs.next()) {
-				Column column = new Column();
-				column.setKid(rs.getInt(1));
-				column.setKindname(rs.getString(2));
-				columns.add(column);
-				System.out.println("显示1");
-			}
-		}else if (cid!=0&&kid<=2) {
-			//显示二级标签
-			sql = "select * from class join kind on class.kid=kind.kid where class.kid<=2";
-			pstmt = this.con.prepareStatement(sql);
-			rs = pstmt.executeQuery();
-			while(rs.next()){
-				Column column = new Column();
-				column.setCid(rs.getInt(1));
-				column.setClassname(rs.getString(2));
-				column.setKid(rs.getInt(3));
-				column.setKindname(rs.getString(5));
-				columns.add(column);
-				System.out.println("显示2");
-			}
-		}else if(cid!=0&&kid==4){
-			//显示动漫标签
-			sql = "select * from class join kind on class.kid=kind.kid where class.kid=4";
-			pstmt = this.con.prepareStatement(sql);
-			rs = pstmt.executeQuery();
-			while (rs.next()) {
-				Column column = new Column();
-				column.setCid(rs.getInt(1));
-				column.setClassname(rs.getString(2));
-				column.setKid(rs.getInt(3));
-				column.setKindname(rs.getString(5));
-				columns.add(column);
-				System.out.println("显示3");
-			}
-		}
-		rs.close();
-		pstmt.close();
-		return columns;
-	}
 }

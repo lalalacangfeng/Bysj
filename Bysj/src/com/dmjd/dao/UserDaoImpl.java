@@ -11,36 +11,43 @@ import com.dmjd.entity.User;
 
 public class UserDaoImpl implements UserDao {
 
-	private Connection con = null;
-	private PreparedStatement pstmt = null;
-	ResultSet rs = null;
-	Vector<User> uservector = new Vector<User>();
+	private Connection con = null;//连接语句
+	private PreparedStatement pstmt = null;//数据集
+	ResultSet rs = null;//查询结果集
 
+	//默认构造方法中实例化数据库连接
 	public UserDaoImpl(Connection con) {
 		this.con = con;
 	}
 
+	/***
+	 * 查询所有用户
+	 */
 	@Override
 	public ArrayList<User> FindAll() throws Exception {
-		ArrayList<User> userlist = new ArrayList<User>();
-		String sql = "select * from users";
+		ArrayList<User> users = new ArrayList<User>();//用户列表
+		String sql = "select * from users";//查询语句
 		pstmt = this.con.prepareStatement(sql);
 		rs =this.pstmt.executeQuery();
-		while (rs.next()) {
+		while (rs.next()) {//遍历结果集
 			User user = new User();
 			user.setUid(rs.getInt(1));
 			user.setUsername(rs.getString(2));
 			user.setEmail(rs.getString(4));
-			user.setLasttime(rs.getDate(5));
-//			System.out.println("rs2:"+rs.getString(1));
-			userlist.add(user);
-//			System.out.println("userlist:"+userlist.get(0).getUsername());
+			user.setLasttime(rs.getDate(5));//有需要改动
+			user.setRole(rs.getInt(6));
+			System.out.println("用户权限:"+user.getRole());
+			System.out.println("最后登录时间："+user.getLasttime());
+			users.add(user);//将数据结果添加到用户列表中
 		}
 		rs.close();
 		pstmt.close();
-		return userlist;
+		return users;
 	}
 
+	/***
+	 * 添加用户
+	 */
 	@Override
 	public int addUser(User user) throws Exception {
 		int result = 0;
@@ -54,6 +61,9 @@ public class UserDaoImpl implements UserDao {
 		return result;
 	}
 
+	/***
+	 * 修改用户信息
+	 */
 	@Override
 	public int editInf(int uid, String username, String email) throws Exception {
 		System.out.println(uid + "----" + username + "----" + email);
@@ -68,6 +78,9 @@ public class UserDaoImpl implements UserDao {
 		return result;
 	}
 
+	/***
+	 * 修改用户密码
+	 */
 	@Override
 	public int editPasswd(int uid, String password) throws Exception {
 		String sql = "update users set password=? where uid=?";
@@ -80,6 +93,9 @@ public class UserDaoImpl implements UserDao {
 		return result;
 	}
 
+	/**
+	 * 通过id--删除用户
+	 */
 	@Override
 	public int deleteUser(int uid) throws Exception {
 		String sql = "delete from users where uid=?";
@@ -91,6 +107,9 @@ public class UserDaoImpl implements UserDao {
 		return result;
 	}
 
+	/**
+	 * 根据用户名查询用户
+	 */
 	@Override
 	public User queryByName(String username) throws Exception {
 		User user = new User();
@@ -111,6 +130,9 @@ public class UserDaoImpl implements UserDao {
 		return user;
 	}
 
+	/***
+	 * 根据Email查询用户
+	 */
 	@Override
 	public User queryByEmail(String email) throws Exception {
 		String sql = "select * from users where email=?";

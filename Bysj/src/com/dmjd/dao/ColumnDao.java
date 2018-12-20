@@ -9,21 +9,15 @@ public interface ColumnDao {
 	//查询所有栏目
 	public ArrayList<Column> findAllColumns() throws Exception;
 	
-	//查询动漫分类标签
-	public ArrayList<Column> findDmColumns() throws Exception;
-	
-	//添加栏目or动漫标签
+	//添加栏目
 	public int addColumn(Column column) throws Exception;
 	
-	//删除栏目or动漫标签
-	public int delColumn(int cid,int kid) throws Exception;
+	//删除栏目
+	public int delColumn(int id,int pid) throws Exception;
 
-	//显示栏目or动漫标签
-	public Column showColumn(int cid,int kid) throws Exception;
+	//显示修改栏目
+	public Column showColumn(int id,int pid) throws Exception;
 	
-	//初始化栏目or动漫标签
-	public ArrayList<Column> initColumn(int cid,int kid) throws Exception;
-	
-	//修改栏目or动漫标签
-	public int editColumn(int cid,int kid,Column column) throws Exception;
+	//修改栏目
+	public int editColumn(int id,Column column) throws Exception;
 }

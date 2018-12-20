@@ -15,14 +15,15 @@ public class ShowArticleAction implements Action {
 	@Override
 	public String execute(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		try {
-			int nid = Integer.parseInt(request.getParameter("nid"));
-			System.out.println("显示新闻");
+			int nid = Integer.valueOf(request.getParameter("nid"));
 			Article article = DaoFactory.getArticleDaoInstance().queryBynid(nid);
-			if (article!=null) {
+			if (article != null) {//新闻存在
 				request.setAttribute("article", article);
 			}
 		} catch (Exception e) {
+			// TODO: handle exception
 			e.printStackTrace();
 		}
 		return "article/article.jsp";

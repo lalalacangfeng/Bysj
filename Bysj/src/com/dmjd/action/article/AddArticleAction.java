@@ -1,9 +1,7 @@
 package com.dmjd.action.article;
 
 import java.io.IOException;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -20,38 +18,35 @@ public class AddArticleAction implements Action {
 	@Override
 	public String execute(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		String releasetime = request.getParameter("releasetime");
-		System.out.println("----releasetime:"+releasetime);
-		String articletitle = request.getParameter("articletitle");
-		int cid =Integer.valueOf(request.getParameter("classname"));
-		String articlewriter = request.getParameter("articlewriter");
-		String from = request.getParameter("from");
-		int layers = Integer.valueOf(request.getParameter("layers"));
-		System.out.println("request.getParameter:"+request.getParameter("releasetime"));
-		String content = request.getParameter("content");
+		// TODO Auto-generated method stub
+		String title = request.getParameter("title");//获取标题
+		String writer = request.getParameter("writer");//获取作者
+		String from = request.getParameter("from");//获取来源
+		int layers = Integer.valueOf(request.getParameter("layers"));//获取层级
+		String content = request.getParameter("content");//获取内容
+		String releasetime = request.getParameter("releasetime");//获取发布时间
+		int cid =Integer.valueOf(request.getParameter("columnname"));//获取所属栏目
+		Article article = new Article();
 		try {
-//			System.out.println("articletitle:"+articletitle+"cid:"+cid+"content:"+content);
-			Article article = new Article();
-			article.setArticletitle(articletitle);
-			article.setArticlewriter(articlewriter);
+			article.setTitle(title);
+			article.setWriter(writer);
 			article.setFrom(from);
-			article.setLayers(layers);
+			article.setContent(content);
 			article.setReleasetime(releasetime);
-			article.setArticlecontent(content);
 			article.setCid(cid);
-			if(DaoFactory.getArticleDaoInstance().addArticle(article)==1){
-				System.out.println("文章添加成功");
-				request.getSession().setAttribute("article", article);
-				request.setAttribute("status", "文章添加成功！");
+			if (DaoFactory.getArticleDaoInstance().addArticle(article) == 1) {
+				System.out.println("添加文章成功");
+				request.setAttribute("status", "添加文章成功!");
 			}else {
-				System.out.println("文章添加失败");
-				request.setAttribute("status", "文章添加失败！");
+				System.out.println("添加文章失败");
+				request.setAttribute("status", "添加文章失败!");
 			}
 		} catch (Exception e) {
-			System.out.println("error");
 			e.printStackTrace();
+			// TODO: handle exception
 		}
-		return "article?action=show";
+		
+		return "article?action=findall";
 	}
 
 }

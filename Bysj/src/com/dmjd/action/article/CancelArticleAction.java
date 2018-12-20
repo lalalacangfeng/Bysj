@@ -14,12 +14,10 @@ public class CancelArticleAction implements Action {
 	@Override
 	public String execute(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("CancelArticleAction");
+		// TODO Auto-generated method stub
 		try {
 			int nid = Integer.valueOf(request.getParameter("nid"));
-			System.out.println("---nid:"+nid);
-			if (DaoFactory.getArticleDaoInstance().cancelArticle(nid)==1) {
-				request.getSession().setAttribute("nid", nid);
+			if (DaoFactory.getArticleDaoInstance().cancelArticle(nid) == 1) {
 				System.out.println("文章撤销成功");
 				request.setAttribute("status", "文章撤销成功");
 			}else {
@@ -27,9 +25,10 @@ public class CancelArticleAction implements Action {
 				request.setAttribute("status", "文章撤销失败");
 			}
 		} catch (Exception e) {
+			// TODO: handle exception
 			e.printStackTrace();
 		}
-		return "article?action=show";
+		return "article?action=findall";
 	}
 
 }

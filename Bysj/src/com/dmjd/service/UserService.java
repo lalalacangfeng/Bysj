@@ -24,16 +24,16 @@ public class UserService implements UserDao {
 
 	@Override
 	public ArrayList<User> FindAll() throws Exception {
-		ArrayList<User> userlist = new ArrayList<>();
+		ArrayList<User> users = new ArrayList<>();
 		//Vector<User> uservector = new Vector<>();
 		try {
-			userlist = this.dao.FindAll();
+			users = this.dao.FindAll();
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally{
 			this.con.close();
 		}
-		return userlist;
+		return users;
 	}
 	
 	@Override

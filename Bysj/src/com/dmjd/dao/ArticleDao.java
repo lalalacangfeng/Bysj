@@ -6,9 +6,6 @@ import com.dmjd.entity.Article;
 import com.dmjd.entity.Column;
 
 public interface ArticleDao {
-	
-	//初始化栏目
-	public ArrayList<Column> initColumn() throws Exception;
 
 	//添加新闻
 	public int addArticle(Article article) throws Exception;
@@ -26,7 +23,7 @@ public interface ArticleDao {
 	public ArrayList<Article> FindAll() throws Exception;
 	
 	//查询新闻
-	public ArrayList<Article> queryBytitle(String articletitle) throws Exception;
+	public ArrayList<Article> queryBytitle(String title) throws Exception;
 	
 	//发布新闻
 	public int releaseArticle(int nid) throws Exception;

@@ -12,16 +12,20 @@ import com.dmjd.factory.DaoFactory;
 
 public class ShowUserAction implements Action {
 
+	/***
+	 * 显示用户信息
+	 */
 	@Override
 	public String execute(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		try {
-			User user=DaoFactory.getUserDaoInstance().queryByName(String.valueOf(request.getSession().getAttribute("username")));
-			request.setAttribute("email", user.getEmail());
+			User user = DaoFactory.getUserDaoInstance().queryByName(
+					String.valueOf(request.getSession().getAttribute("username")));//通过session获取用户名并查信息
+			request.setAttribute("email", user.getEmail());//返回邮箱
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "user/myuserinf.jsp";
+		return "user/myuserinf.jsp";//显示用户信息页面
 	}
 
 }

@@ -14,19 +14,21 @@ public class DelColumnAction implements Action {
 	@Override
 	public String execute(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-			int kid = Integer.parseInt(request.getParameter("kid"));
-			int cid = Integer.parseInt(request.getParameter("cid"));
-			try {
-				if (DaoFactory.getColumnDaoInstance().delColumn(cid, kid)==1) {
-					System.out.println("删除成功");
-					request.setAttribute("status", "已删除成功");
-				}else {
-					System.out.println("删除失败");
-					request.setAttribute("status", "已删除失败");
-				}
-			} catch (Exception e) {
-				e.printStackTrace();
+		// TODO Auto-generated method stub
+		try {
+			int id = Integer.valueOf(request.getParameter("id"));
+			int pid = Integer.valueOf(request.getParameter("pid"));
+			if (DaoFactory.getColumnDaoInstance().delColumn(id, pid) == 1) {
+				System.out.println("删除成功");
+				request.setAttribute("status", "删除成功");
+			}else {
+				System.out.println("删除失败");
+				request.setAttribute("status", "删除失败");
 			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			// TODO: handle exception
+		}
 		return "column?action=findall";
 	}
 

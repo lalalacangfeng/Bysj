@@ -15,38 +15,32 @@ public class EditArticleAction implements Action {
 	@Override
 	public String execute(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		String articletitle = request.getParameter("articletitle");
-		String articlewriter = request.getParameter("articlewriter");
-		String from = request.getParameter("from");
-		String content = request.getParameter("content");
-		int layers = Integer.valueOf(request.getParameter("layers"));
-		String releasetime = request.getParameter("releasetime");
-		int cid =Integer.valueOf(request.getParameter("classname"));
-		int nid = (int) request.getSession().getAttribute("nid");
-		System.out.println("nid:"+nid+" releasetime:"+releasetime+" articletitle:"+articletitle+" cid:"+cid
-				+" articlewriter:"+articlewriter+" from:"+from+" layers:"+layers+" content:"+content);
-		Article article = new Article();
-		article.setNid(nid);
-		article.setArticletitle(articletitle);
-		article.setArticlewriter(articlewriter);
-		article.setFrom(from);
-		article.setLayers(layers);
-		article.setReleasetime(releasetime);
-		article.setArticlecontent(content);
-		article.setCid(cid);
+		// TODO Auto-generated method stub
+		int nid = Integer.valueOf(request.getParameter("nid"));
 		System.out.println("nid:"+nid);
+		String title = request.getParameter("title");//获取标题
+		String writer = request.getParameter("writer");//获取作者
+		String from = request.getParameter("from");//获取来源
+		int layers = Integer.valueOf(request.getParameter("layers"));//获取层级
+		String content = request.getParameter("content");//获取内容
+		String releasetime = request.getParameter("releasetime");//获取发布时间
+		int cid =Integer.valueOf(request.getParameter("columnname"));//获取所属栏目
+		Article article = new Article();			
 		try {
-			if (DaoFactory.getArticleDaoInstance().editArticle(nid,article) == 1) {
-				System.out.println("文章修改成功");
-				request.setAttribute("status", "修改成功");
-			} else {
-				System.out.println("修改失败");
-				request.setAttribute("status", "修改失败");
+			article.setTitle(title);
+			article.setWriter(writer);
+			article.setFrom(from);
+			article.setContent(content);
+			article.setReleasetime(releasetime);
+			article.setCid(cid);
+			if (DaoFactory.getArticleDaoInstance().editArticle(nid, article) == 1) {
+				System.out.println("修改文章成功");
+				request.setAttribute("status", "修改文章成功!");
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			// TODO: handle exception
 		}
-		return "article?action=show";
+		return "article?action=findall";
 	}
 
 }

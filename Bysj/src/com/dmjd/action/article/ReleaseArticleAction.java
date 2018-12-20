@@ -14,23 +14,17 @@ public class ReleaseArticleAction implements Action {
 	@Override
 	public String execute(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("ReleaseArticleAction");
+		// TODO Auto-generated method stub
 		try {
-			int nid = Integer.valueOf(request.getParameter("nid"));
-			System.out.println("---nid:"+nid);
-			if (DaoFactory.getArticleDaoInstance().releaseArticle(nid)==1) {
-				request.getSession().setAttribute("nid", nid);
+			int nid = Integer.valueOf(request.getParameter("nid"));//获取新闻编号
+			if (DaoFactory.getArticleDaoInstance().releaseArticle(nid) == 1) {
 				System.out.println("文章发布成功");
 				request.setAttribute("status", "文章发布成功！");
-			} else {
-				System.out.println("文章发布失败");
-				request.setAttribute("status", "文章发布失败！");
-			}
+			}			
 		} catch (Exception e) {
-			System.out.println("error");
-			e.printStackTrace();
+			// TODO: handle exception
 		}
-		return "article?action=show";
+		return "article?action=findall";
 	}
 
 }

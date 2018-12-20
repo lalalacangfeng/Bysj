@@ -1,12 +1,12 @@
 package com.dmjd.entity;
 
 public class Answer {
-	private int aid;
-	private String comment;
-	private Article article;
-	private int nid;
-	private String username;
-	private String answertime;
+	private int aid;//答复编号
+	private String comment;//评论
+	private Article article;//文章
+	private int nid;//新闻编号
+	private String username;//用户
+	private String answertime;//答复时间
 	
 	public int getAid() {
 		return aid;
