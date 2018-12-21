@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpServlet;
 
 import com.dmjd.action.Action;
-import com.dmjd.entity.Article;
 import com.dmjd.factory.DaoFactory;
+import com.dmjd.pojo.Article;
 
 public class FindallArticleAction implements Action {
 

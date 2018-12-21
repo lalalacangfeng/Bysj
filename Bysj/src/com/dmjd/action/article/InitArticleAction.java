@@ -7,8 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.dmjd.action.Action;
-import com.dmjd.entity.Article;
 import com.dmjd.factory.DaoFactory;
+import com.dmjd.pojo.Article;
 
 public class InitArticleAction implements Action {
 

@@ -16,8 +16,8 @@ import com.dmjd.action.column.DelColumnAction;
 import com.dmjd.action.column.FindallColumnAction;
 import com.dmjd.action.column.InitColumnAction;
 import com.dmjd.action.column.EditColumnAction;
-import com.dmjd.entity.Column;
 import com.dmjd.factory.DaoFactory;
+import com.dmjd.pojo.Column;
 
 @WebServlet(
 		name="columnServlet",

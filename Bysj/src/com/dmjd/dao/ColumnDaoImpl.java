@@ -5,7 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
-import com.dmjd.entity.Column;
+import com.dmjd.pojo.Column;
 
 public class ColumnDaoImpl implements ColumnDao {
 

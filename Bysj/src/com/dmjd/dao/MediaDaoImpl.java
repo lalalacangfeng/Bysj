@@ -10,8 +10,8 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 
-import com.dmjd.entity.Vedio;
-import com.dmjd.entity.Pict;
+import com.dmjd.pojo.Pict;
+import com.dmjd.pojo.Vedio;
 import com.mysql.fabric.xmlrpc.base.Data;
 
 public class MediaDaoImpl implements MediaDao {

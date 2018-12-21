@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.dmjd.action.Action;
-import com.dmjd.entity.User;
 import com.dmjd.factory.DaoFactory;
+import com.dmjd.pojo.User;
 
 public class QuerryAllUer implements Action {
 

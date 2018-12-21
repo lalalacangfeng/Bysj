@@ -8,7 +8,7 @@ import java.util.Vector;
 import com.dmjd.dao.UserDao;
 import com.dmjd.dao.UserDaoImpl;
 import com.dmjd.database.ConSql;
-import com.dmjd.entity.User;
+import com.dmjd.pojo.User;
 
 public class UserService implements UserDao {
 

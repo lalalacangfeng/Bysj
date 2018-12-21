@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Vector;
 
-import com.dmjd.entity.User;
+import com.dmjd.pojo.User;
 
 public class UserDaoImpl implements UserDao {
 

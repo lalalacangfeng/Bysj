@@ -24,6 +24,8 @@ import java.util.UUID;
 
 
 
+
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -37,10 +39,10 @@ import com.dmjd.action.media.UploadPictAction;
 import com.dmjd.action.media.UploadVedioAction;
 import com.dmjd.action.media.checkChunkAction;
 import com.dmjd.action.media.mergeChunksAction;
-import com.dmjd.entity.Column;
-import com.dmjd.entity.Vedio;
-import com.dmjd.entity.Pict;
 import com.dmjd.factory.DaoFactory;
+import com.dmjd.pojo.Column;
+import com.dmjd.pojo.Pict;
+import com.dmjd.pojo.Vedio;
 
 @WebServlet(
 		name = "mediaServlet", 

@@ -17,8 +17,8 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.io.IOUtils;
 
 import com.dmjd.action.Action;
-import com.dmjd.entity.Vedio;
 import com.dmjd.factory.DaoFactory;
+import com.dmjd.pojo.Vedio;
 
 public class UploadVedioAction implements Action {
 

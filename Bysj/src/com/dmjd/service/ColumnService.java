@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import com.dmjd.dao.ColumnDao;
 import com.dmjd.dao.ColumnDaoImpl;
 import com.dmjd.database.ConSql;
-import com.dmjd.entity.Column;
+import com.dmjd.pojo.Column;
 
 public class ColumnService implements ColumnDao {
 

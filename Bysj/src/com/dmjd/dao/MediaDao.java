@@ -2,8 +2,8 @@ package com.dmjd.dao;
 
 import java.util.ArrayList;
 
-import com.dmjd.entity.Vedio;
-import com.dmjd.entity.Pict;
+import com.dmjd.pojo.Pict;
+import com.dmjd.pojo.Vedio;
 
 public interface MediaDao {
 	

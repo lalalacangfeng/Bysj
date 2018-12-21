@@ -3,7 +3,7 @@ package com.dmjd.dao;
 import java.util.ArrayList;
 import java.util.Vector;
 
-import com.dmjd.entity.User;
+import com.dmjd.pojo.User;
 
 public interface UserDao {
 	// 添加用户

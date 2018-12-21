@@ -8,9 +8,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.dmjd.action.Action;
-import com.dmjd.entity.Vedio;
-import com.dmjd.entity.Pict;
 import com.dmjd.factory.DaoFactory;
+import com.dmjd.pojo.Pict;
+import com.dmjd.pojo.Vedio;
 
 public class UpdateAction implements Action {
 

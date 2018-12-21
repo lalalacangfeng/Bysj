@@ -7,8 +7,8 @@ import java.sql.ResultSet;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 
-import com.dmjd.entity.Article;
-import com.dmjd.entity.Column;
+import com.dmjd.pojo.Article;
+import com.dmjd.pojo.Column;
 
 public class ArticleDaoImpl implements ArticleDao {
 

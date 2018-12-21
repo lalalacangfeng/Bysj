@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.dmjd.action.Action;
-import com.dmjd.entity.Column;
 import com.dmjd.factory.DaoFactory;
+import com.dmjd.pojo.Column;
 
 public class FindallColumnAction implements Action {
 

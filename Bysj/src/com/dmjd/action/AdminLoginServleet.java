@@ -12,8 +12,8 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.catalina.util.Base64;
 
-import com.dmjd.entity.User;
 import com.dmjd.factory.DaoFactory;
+import com.dmjd.pojo.User;
 
 @WebServlet(
 		urlPatterns = {"/admin/login"},

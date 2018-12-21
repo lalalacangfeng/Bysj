@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import com.dmjd.dao.ArticleDao;
 import com.dmjd.dao.ArticleDaoImpl;
 import com.dmjd.database.ConSql;
-import com.dmjd.entity.Article;
+import com.dmjd.pojo.Article;
 
 public class ArticleService implements ArticleDao {
 

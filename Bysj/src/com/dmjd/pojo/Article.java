@@ -1,4 +1,4 @@
-package com.dmjd.entity;
+package com.dmjd.pojo;
 
 import java.io.Serializable;
 import java.util.Set;

@@ -2,7 +2,7 @@ package com.dmjd.dao;
 
 import java.util.ArrayList;
 
-import com.dmjd.entity.Column;
+import com.dmjd.pojo.Column;
 
 public interface ColumnDao {
 

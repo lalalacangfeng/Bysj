@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import com.dmjd.dao.MediaDao;
 import com.dmjd.dao.MediaDaoImpl;
 import com.dmjd.database.ConSql;
-import com.dmjd.entity.Vedio;
-import com.dmjd.entity.Pict;
+import com.dmjd.pojo.Pict;
+import com.dmjd.pojo.Vedio;
 
 public class MediaService implements MediaDao {
 

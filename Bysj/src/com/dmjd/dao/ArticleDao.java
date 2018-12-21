@@ -2,8 +2,8 @@ package com.dmjd.dao;
 
 import java.util.ArrayList;
 
-import com.dmjd.entity.Article;
-import com.dmjd.entity.Column;
+import com.dmjd.pojo.Article;
+import com.dmjd.pojo.Column;
 
 public interface ArticleDao {
 

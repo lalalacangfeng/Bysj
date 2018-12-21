@@ -17,8 +17,8 @@ import com.dmjd.action.article.FindallArticleAction;
 import com.dmjd.action.article.InitArticleAction;
 import com.dmjd.action.article.ReleaseArticleAction;
 import com.dmjd.action.article.ShowArticleAction;
-import com.dmjd.entity.Article;
 import com.dmjd.factory.DaoFactory;
+import com.dmjd.pojo.Article;
 
 @WebServlet(
 		urlPatterns={"/admin/article"},

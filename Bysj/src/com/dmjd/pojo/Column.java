@@ -1,4 +1,4 @@
-package com.dmjd.entity;
+package com.dmjd.pojo;
 
 public class Column {
 	private int cid;//栏目编号
