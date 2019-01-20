@@ -2,7 +2,8 @@
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-
+System.out.println("basePath:"+basePath);
+System.out.println("Path:"+path);
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -21,7 +22,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <link href="<%=basePath%>css/bootstrap.min.css" rel="stylesheet">
     <link href="<%=basePath%>css/font-awesome.css?v=4.4.0" rel="stylesheet">
     <link href="<%=basePath%>css/animate.css" rel="stylesheet">
-    <link href="<%=basePath%>css/style.css" rel="stylesheet">
+    <link href="<%=basePath%>css/admin/style.css" rel="stylesheet">
     <link href="<%=basePath%>css/login.css" rel="stylesheet">
     <!--[if lt IE 9]>
     <meta http-equiv="refresh" content="0;ie.html" />

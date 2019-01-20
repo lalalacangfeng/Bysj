@@ -27,7 +27,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <link rel="stylesheet" type="text/css" href="css/plugins/webuploader/webuploader.css">
     <link rel="stylesheet" type="text/css" href="css/demo/webuploader-demo.css">
 	
-	<link href="css/style.css?v=4.1.0" rel="stylesheet">
+	<link href="css/admin/style.css?v=4.1.0" rel="stylesheet">
 
   </head>
   

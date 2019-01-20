@@ -28,7 +28,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <link href="css/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet">
 
     <link href="css/animate.css" rel="stylesheet">
-    <link href="css/style.css?v=4.1.0" rel="stylesheet">	
+    <link href="css/admin/style.css?v=4.1.0" rel="stylesheet">	
 
   </head>
   

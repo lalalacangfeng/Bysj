@@ -25,7 +25,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
     <link href="js/plugins/fancybox/jquery.fancybox.css" rel="stylesheet">
     <link href="css/animate.css" rel="stylesheet">
-    <link href="css/style.css?v=4.1.0" rel="stylesheet">
+    <link href="css/admin/style.css?v=4.1.0" rel="stylesheet">
 
 	<style>
 .div1{
@@ -53,9 +53,10 @@ border:1px soild #f00;
     <div class="ibox-content">
 	<c:forEach items="${picts }" var="pict">
 
-	        <a class="fancybox" href="pict/temp/${pict.src }" title="${pict.name }">
-	            <img alt="image" src="pict/temp/${pict.src }" />
+	        <a class="fancybox" href="${pict.src }" title="${pict.name }">
+	            <img alt="image" src="${pict.src }" />
 	        </a>
+	        <a href="admin/media?action=del&id=${pict.id }&type=pict">删除</a>
 
 	</c:forEach>
 
@@ -69,10 +70,6 @@ border:1px soild #f00;
 
     <!-- Fancy box -->
     <script src="js/plugins/fancybox/jquery.fancybox.js"></script>
-
-	<script type="text/javascript">
-	
-	</script>
 
     <script>
         $(document).ready(function () {

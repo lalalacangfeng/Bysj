@@ -25,7 +25,7 @@ System.out.println("path:"+path+"      basePath:"+basePath);
     <link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
     <link href="css/animate.css" rel="stylesheet">
 
-	<link href="css/style.css?v=4.1.0" rel="stylesheet">
+	<link href="css/admin/style.css?v=4.1.0" rel="stylesheet">
 <style>
        .file-list{
            padding: 20px;
@@ -166,7 +166,7 @@ System.out.println("path:"+path+"      basePath:"+basePath);
  			formData.append('descript', $("#descript").val());
  			formData.append('file', fileList[i]);
  			$.ajax({
- 				url: 'admin/media?action=pict&len=' + len,
+ 				url: 'admin/media?action=pict',
  				type: 'post',
  				data: formData,
  				dataType: "json",
@@ -174,14 +174,19 @@ System.out.println("path:"+path+"      basePath:"+basePath);
  				contentType: false,
 
 				async: false, //同步传输，并添加返回值，返回值应为已定义的全局变量 
- 				success: function (data) {
- 					console.log(data);
- 					console.log("successflag1:"+flag);
- 					if (data.ifExist) {
- 						alert("上传成功");
- 						flag = true;
-	 					console.log("successflag2:"+flag);
- 					}
+ 				success: function (result) {
+ 					console.log(result);
+ 					console.log("successflag1:"+result);
+ 					if(result.ifExist == 1){
+                        alert("上传成功！");
+                        window.location.href ="admin/media?action=update";
+                    }
+                    else if(result.ifExist == 2){
+                        alert("上传失败！");
+                    }
+                    else if(result.ifExist == 3){
+                        alert("上传失败！图片已经存在！");
+                    }
  				},
  				error: function (XMLHttpRequest, textStatus, errorThrown) {
  					//alert(XMLHttpRequest.status);
@@ -201,7 +206,7 @@ System.out.println("path:"+path+"      basePath:"+basePath);
  	}
  	if (flag) {
  			alert("准备跳转！");
-		 	window.location.href ="admin/media?action=update&type=pict";
+		 	window.location.href ="admin/media?action=update";
  		}
 
 

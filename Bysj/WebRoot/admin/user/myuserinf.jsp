@@ -23,7 +23,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
     <link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
     <link href="css/animate.css" rel="stylesheet">
-    <link href="css/style.css?v=4.1.0" rel="stylesheet">
+    <link href="css/admin/style.css?v=4.1.0" rel="stylesheet">
 
   </head>
   
@@ -42,8 +42,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     			</tr>    	    			
     		</tbody>
     	</table>
-	            <a href="user?action=edit"><button type="button" class="btn btn-w-m btn-success" >修改信息</button></a>
-	            <a href="user/editpasswd.jsp"><button type="button" class="btn btn-w-m btn-default">修改密码</button></a>	 
+	            <a href="admin/user?action=edit"><button type="button" class="btn btn-w-m btn-success" >修改信息</button></a>
+	            <a href="admin/user/editpasswd.jsp"><button type="button" class="btn btn-w-m btn-default">修改密码</button></a>	 
 	</div>
     </center>
 

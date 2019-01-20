@@ -26,7 +26,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
     <link href="css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
     <link href="css/animate.css" rel="stylesheet">
-    <link href="css/style.css?v=4.1.0" rel="stylesheet">
+    <link href="css/admin/style.css?v=4.1.0" rel="stylesheet">
   </head>
    <body class="fixed-sidebar full-height-layout gray-bg" style="overflow:hidden">
 	<div id="wrapper">
@@ -75,8 +75,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             </li>
                             <li><a class="J_menuItem" href="admin/user?action=list">用户列表</a>
                             </li>
-                            <li><a class="J_menuItem" href="">添加用户</a>
+                            <!-- 
+                            <li><a class="J_menuItem" href="admin/user/adduser.jsp">添加用户</a>
                             </li>
+                             -->
                         </ul>
                     </li>                    
                     <li>
@@ -98,7 +100,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             </li>
                             <li><a class="J_menuItem" href="admin/media/addpict.jsp">上传图片
                             </li>
-                            <li><a class="J_menuItem" href="admin/media/vedios.jsp">视频列表</a>
+                            <li><a class="J_menuItem" href="admin/media/medias.jsp">媒体列表</a>
                             </li>
                         </ul>
                     </li>                   
@@ -175,7 +177,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <script src="js/plugins/layer/layer.min.js"></script>
 
     <!-- 自定义js -->
-    <script src="js/hAdmin.js?v=4.1.0"></script>
+    <script src="js/admin/hAdmin.js?v=4.1.0"></script>
     <script type="text/javascript" src="js/index.js"></script>
 
     <!-- 第三方插件 -->
