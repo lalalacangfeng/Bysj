@@ -40,11 +40,6 @@
 		<jsp:include page="head.jsp"></jsp:include>
 	</div>
 
-
-	<div id="carousel">
-		<jsp:include page="carousel.jsp"></jsp:include>
-	</div>
-
 	<br>
 	<br>
 	<br>

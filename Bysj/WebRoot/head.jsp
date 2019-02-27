@@ -56,13 +56,14 @@
 					</c:choose>
 				</c:forEach>
 
-				<form action="" method="post" class="navbar-form navbar-right"
+				<form action="fm/query" method="get" class="navbar-form navbar-right"
 					role="search">
 					<div class="form-group">
-						<input type="text" class="form-control" autocomplete="on"
+						<input name="title" type="text" class="form-control" autocomplete="on"
 							placeholder="小黄人">
 					</div>
-					<button type="button" class="btn btn-default">
+					<input type="hidden" name="action" value="query"/>
+					<button type="submit" class="btn btn-default">
 						<span aria-hidden="true"><img src="img/btn_search.png"
 							alt="btn_search" style="width: 25px;" /></span>
 					</button>
@@ -70,10 +71,19 @@
 			</ul>
 
 			<ul class="nav navbar-nav navbar-right">
+				<!-- 待定
+				<li role="presentation"><a>
+				<button type="button" data-toggle="modal" data-target="#gonggao"
+									style="background-color: transparent; border: 0;">公告</button>
+									</a></li>
+				 -->
 				<c:choose>
 					<c:when test="${username != null }">
 						<!-- 用户存在 -->
-						<li role="presentation"><a> ${username } </a></li>
+						<li role="presentation"><a>
+						<button type="button" data-toggle="modal" data-target="#${username }"
+									style="background-color: transparent; border: 0;">${username }</button>
+						  </a></li>
 						<li role="presentation"><a href="fm/logout"> 注销 </a></li>
 					</c:when>
 					<c:otherwise>
@@ -88,8 +98,10 @@
 						</a></li>
 					</c:otherwise>
 				</c:choose>
-
-				<!-- 注册窗口 -->
+				
+				<c:choose>
+					<c:when test="${username == null }">
+					<!-- 注册窗口 -->
 				<div id="register" class="modal fade" tabindex="-1">
 					<div class="modal-dialog">
 						<div class="modal-content">
@@ -175,11 +187,177 @@
 						</div>
 					</div>
 				</div>
-				<script src="js/head.js"></script>
+					</c:when></c:choose>
 
+				
+				<c:if test="${username!=null }">
+					<!-- 用户信息 -->
+					<div id="${username }" class="modal fade">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-body">
+									<button class="close" data-dismiss="modal">
+										<span>&times;</span>
+									</button>
+								</div>
+								<div class="modal-title">
+									<h1 class="text-center">${username }用户信息</h1>
+								</div>
+								<div class="modal-body">
+									<table>
+										<tbody>
+											<tr>
+												<td><label>用户名：</label></td>
+												<td><label class="form-control" style="width:100%">${username}</label></td>
+											</tr>
+											<tr>
+												<td><label>用户邮箱：</label></td>
+												<td><label class="form-control" style="width:100%">${email}</label></td>
+											</tr>
+										</tbody>
+									</table>
+									<a><button type="button" class="btn btn-w-m btn-success" data-toggle="modal" data-target="#editinf"
+									>修改信息</button></a>
+          						  	<a><button type="button" class="btn btn-w-m btn-default" data-toggle="modal" data-target="#editpass"
+									>修改密码</button></a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- 修改用户信息 -->
+					<div id="editinf" class="modal fade">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-body">
+									<button class="close" data-dismiss="modal">
+										<span>&times;</span>
+									</button>
+								</div>
+								<div class="modal-title">
+									<h1 class="text-center">${username }用户信息</h1>
+								</div>
+								<div class="modal-body">
+									<form id="editinf" action="fm/user" method="post">
+										<table>
+											<tbody>
+												<tr>
+													<td><label>用户名：</label></td>
+													<td><input name="username" class="form-control" oninput="checkName()" id="uname"
+														required="required" type="text" value="${username }">
+														<label class="col-sm-3 control-label" id="userstatus"
+											style="color: #FF0000; "></label>
+														<p></td>
+												</tr>
+												<tr>
+													<td><label>用户邮箱：</label></td>
+													<td><input name="email" class="form-control" oninput="checkEmail()" id="email"s
+														required="required" type="text" value="${email}">
+											<label class="col-sm-3 control-label" id="emailstatus"
+											style="color: #FF0000; "></label>
+														<p></td>
+												</tr>
+											</tbody>
+										</table>
+										
+										<input class="btn btn-w-m btn-success" type="button"
+											value="修&nbsp; 改" onclick="edituserinf()"/>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- 修改用户密码 -->
+					<div id="editpass" class="modal fade">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-body">
+									<button class="close" data-dismiss="modal">
+										<span>&times;</span>
+									</button>
+								</div>
+								<div class="modal-title">
+									<h1 class="text-center">${username }用户信息</h1>
+								</div>
+								<div class="modal-body">
+									<form id="editpasswd" action="fm/user" method="post">
+										<table>
+											<tbody>
+												<tr>
+													<td><label>原密码：</label></td>
+													<td><input name="oldPasswd" class="form-control" id="oldPasswd"
+														required="required" type="password" value="${oldPasswd }">
+													<p></td>
+												</tr>
+												<tr>
+													<td><label>新密码：</label></td>
+													<td><input name="passwd" class="form-control" id="passwd1"
+														required="required" type="password" value="${password}">
+													<p></td>
+												</tr>
+												<tr>
+													<td><label>确认密码：</label></td>
+													<td><input name="secpasswd" class="form-control" oninput="checkPass()"
+														required="required" type="password"  id="secpasswd"
+														value="${confirepasswd}">
+														<label class="col-sm-3 control-label" id="passwdstatus"
+											style="color: #FF0000; "></label>
+													<p></td>
+												</tr>
+											</tbody>
+										</table>
+										<input type="hidden" name="action" value="editpasswd">
+										<input class="btn btn-w-m btn-success" type="button"
+											value="修&nbsp; 改" onclick="editpass()">
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</c:if>
+					
+				<!-- 公告-->
+				<div id="gonggao" class="modal fade">
+					<div class="modal-dialog">
+						<c:choose>
+							<c:when test="${not empty gonggao }">
+								<div class="modal-content">
+									<div class="modal-body">
+										<button class="close" data-dismiss="modal">
+											<span>&times;</span>
+										</button>
+									</div>
+									<div class="modal-title">
+										<h1 class="text-center">${gonggao.title }</h1>
+									</div>
+									<div class="modal-body">
+										<label for="">${gonggao.content }</label>
+									</div>
+								</div>
+							</c:when>
+							<c:otherwise>
+								<div class="modal-content">
+									<div class="modal-body">
+										<button class="close" data-dismiss="modal">
+											<span>&times;</span>
+										</button>
+									</div>
+									<div class="modal-title">
+										<h1 class="text-center">${gonggao.title }</h1>
+									</div>
+									<div class="modal-body">
+										<label for="">暂无新公告</label>
+									</div>
+								</div>
+								
+							</c:otherwise>
+						</c:choose>
+					</div>
+				</div>
+					
 			</ul>
 		</nav>
 	</div>
+	<script src="js/head.js"></script>
 </header>
 <!--END NAVBAR-->
 

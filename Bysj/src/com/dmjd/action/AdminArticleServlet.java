@@ -1,6 +1,7 @@
 package com.dmjd.action;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.dmfm.pojo.Menu;
 import com.dmjd.action.article.AddArticleAction;
 import com.dmjd.action.article.CancelArticleAction;
 import com.dmjd.action.article.DelArticleAction;
@@ -30,17 +32,16 @@ public class AdminArticleServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doPost(req, resp);
 	}
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		String action = request.getParameter("action");//获取action类型
 		Action targetAction = null;
 		String path = null;
+		ArrayList<Menu> menus = null;
 		System.out.println("actoin:"+action);
 		switch (action) {
 		case "添加"://添加新闻
@@ -54,10 +55,13 @@ public class AdminArticleServlet extends HttpServlet {
 		case "release"://发表新闻
 			targetAction = new ReleaseArticleAction();
 			path = targetAction.execute(request, response);
+			menus = InitMenus();
 			break;
 		case "cancel"://撤销新闻
 			targetAction = new CancelArticleAction();
 			path = targetAction.execute(request, response);
+			menus = InitMenus();
+						
 			break;
 		case "edit"://进入修改新闻页面
 			targetAction = new InitArticleAction();
@@ -86,25 +90,34 @@ public class AdminArticleServlet extends HttpServlet {
 
 	@Override
 	public void destroy() {
-		// TODO Auto-generated method stub
 	}
 
 	@Override
 	public void init() throws ServletException {
-		// TODO Auto-generated method stub
 		try {
 			ArrayList<Article> articles = DaoFactory.getArticleDaoInstance().FindAll();
 			getServletContext().setAttribute("articles", articles);//将文章存为全局变量
-			System.out.println("----------------------------\n"
-					 + "------articles栏目初始化成功------\n"
-					 + "----------------------------\n");
 		} catch (Exception e) {
-			// TODO: handle exception
 			System.out.println("----------------------------\n"
 					 + "------articles栏目初始化失败------\n"
 					 + "----------------------------\n");
 			e.printStackTrace();
 		}
+	}
+	
+	public ArrayList<Menu> InitMenus(){
+		ArrayList<Menu> menus = new ArrayList<>();
+		try {
+			menus = com.dmfm.factory.DaoFactory.InitDaoInstance().InitMenus();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		getServletContext().setAttribute("menus", menus);
+		return menus;		
 	}
 
 }

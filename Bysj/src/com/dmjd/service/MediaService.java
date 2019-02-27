@@ -59,6 +59,8 @@ public class MediaService implements MediaDao {
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
+		} finally{
+			this.con.close();
 		}
 		return vedios;
 	}
@@ -70,6 +72,8 @@ public class MediaService implements MediaDao {
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
+		} finally{
+			this.con.close();
 		}
 		return picts;
 	}
@@ -103,21 +107,10 @@ public class MediaService implements MediaDao {
 		} catch (Exception e) {
 			e.printStackTrace();
 			// TODO: handle exception
+		} finally{
+			this.con.close();
 		}
 		return result;
-	}
-
-	@Override
-	public String findVedioByMd5(String value) throws Exception {
-		// TODO Auto-generated method stub
-		String md5 = null;
-		try {
-			md5 = this.dao.findVedioByMd5(value);
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
-		return md5;
 	}
 
 	@Override
@@ -129,6 +122,8 @@ public class MediaService implements MediaDao {
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
+		} finally{
+			this.con.close();
 		}
 		return mask;
 	}
@@ -142,8 +137,68 @@ public class MediaService implements MediaDao {
 		} catch (Exception e) {
 			// TODO: handle exception
 			throw e;
+		} finally{
+			this.con.close();
 		}
 		return result;
+	}
+
+	@Override
+	public Boolean IfSamePict(Pict pict) throws Exception {
+		// TODO Auto-generated method stub
+		boolean mask = false;
+		try {
+			mask = this.dao.IfSamePict(pict);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return mask;
+	}
+
+	@Override
+	public int delPict(int id) throws Exception {
+		// TODO Auto-generated method stub
+		int result = 0;
+		try {
+			result = this.dao.delPict(id);
+		} catch (Exception e) {
+			// TODO: handle exception
+			throw e;
+		} finally{
+			this.con.close();
+		}
+		return result;
+	}
+
+	@Override
+	public ArrayList<String> queryVediaSrcById(int id) throws Exception {
+		// TODO Auto-generated method stub
+		ArrayList<String> srcs = new ArrayList<>();
+		try {
+			srcs = this.dao.queryVediaSrcById(id);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		} finally{
+			this.con.close();
+		}
+		return srcs;
+	}
+
+	@Override
+	public String queryPictSrcById(int id) throws Exception {
+		// TODO Auto-generated method stub
+		String src = null;
+		try {
+			src = this.dao.queryPictSrcById(id);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		} finally{
+			this.con.close();
+		}
+		return src;
 	}
 
 }

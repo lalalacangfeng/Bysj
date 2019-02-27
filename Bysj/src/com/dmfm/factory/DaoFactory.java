@@ -5,12 +5,15 @@ import java.sql.SQLException;
 import com.dmfm.dao.ArticleDao;
 import com.dmfm.dao.InitDao;
 import com.dmfm.dao.MenuDao;
+import com.dmfm.dao.MessageDao;
 import com.dmfm.dao.PictDao;
 import com.dmfm.dao.UserDao;
 import com.dmfm.dao.VedioDao;
+import com.dmfm.pojo.Message;
 import com.dmfm.service.ArticleService;
 import com.dmfm.service.InitService;
 import com.dmfm.service.MenuService;
+import com.dmfm.service.MessageService;
 import com.dmfm.service.PictService;
 import com.dmfm.service.UserService;
 import com.dmfm.service.VedioService;
@@ -45,4 +48,7 @@ public class DaoFactory {
 		return new UserService();
 	}
 
+	public static MessageDao getMessageDaoInstance() throws ClassNotFoundException,SQLException{
+		return new MessageService();
+	}
 }

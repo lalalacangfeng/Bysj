@@ -172,7 +172,8 @@
 	<br />
 
 	<script src="<%=basePath%>/js/jquery.min.js"></script>
-	<script src="<%=basePath%>/js/plugins//layui/layui.js"></script>
+	<script src="<%=basePath%>/js/plugins/layui/layui.js"></script>
+	<script src="<%=basePath%>/js/plugins/layer/layer.min.js"></script>
 	<script type="text/javascript">
     layui.use('element', function () {
         var element = layui.element;
@@ -202,6 +203,7 @@
         $.ajax({
             url: '<%=basePath%>/fm/article/saveReply.do',
 				type : 'POST',
+				dataType : "json",
 				data : [ {
 					lr_for_article_id : lr_for_article_id,
 					lr_name : lr_name,
@@ -210,15 +212,13 @@
 					lr_content : lr_content,
 					lr_for_words : lr_for_words
 				} ],
-				success : function(data) {
-					layer.open({
-						title : '提示信息',
-						content : '留言成功',
-						btn : [ '确定' ],
-						btn1 : function(index) {
-							$("body").html(data);
-						}
-					});
+				success : function(result) {
+					if (result.ifExist == 2) {
+						alert("留言失败！");
+	                } else if (result.ifExist == 1) {
+						alert("留言成功！");
+	                    parent.location.reload();//parent.location.reload()刷新父亲对象（用于框架）
+	                }
 				},
 				error : function() {
 					layer.open({

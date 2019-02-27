@@ -15,7 +15,10 @@ public class Article implements Serializable {
 	private int layers;// 优先级
 	private String releasetime;// 发布时间
 	private int cid;//所属栏目编号
-	private int status;//发表状态
+	private int status;//发表状态	private int cid;//所属栏目
+	private String cname;//所属栏目名称
+	private String profile;//概要
+	private String src;//首张图片地址
 	
 	private String columnname;//所属栏目名称
 	private Set<Answer> answers;//回复
@@ -98,5 +101,25 @@ public class Article implements Serializable {
 	public void setColumnname(String columnname) {
 		this.columnname = columnname;
 	}
+	public String getCname() {
+		return cname;
+	}
+	public void setCname(String cname) {
+		this.cname = cname;
+	}
+	public String getProfile() {
+		return profile;
+	}
+	public void setProfile(String profile) {
+		this.profile = profile;
+	}
+	public String getSrc() {
+		return src;
+	}
+	public void setSrc(String src) {
+		this.src = src;
+	}
 
+	
+	
 }

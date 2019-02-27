@@ -103,7 +103,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!-- Page-Level Scripts -->
     <script>
         $(document).ready(function () {
-            $('.dataTables-example').dataTable();
+            $('.dataTables-example').dataTable({
+            
+            }
+            );
         });
 
     </script>

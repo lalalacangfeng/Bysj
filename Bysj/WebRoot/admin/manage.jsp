@@ -29,6 +29,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <link href="css/admin/style.css?v=4.1.0" rel="stylesheet">
   </head>
    <body class="fixed-sidebar full-height-layout gray-bg" style="overflow:hidden">
+   
+ 
 	<div id="wrapper">
 		<!-- 左侧导航栏 -->
 		<nav class="navbar-default navbar-static-side" role="navigation">
@@ -96,12 +98,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         <a href="#"><i class="fa fa-magic"></i> 
                         <span class="nav-label">上传管理</span><span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
-                            <li><a class="J_menuItem" href="admin/media/addvedio.jsp">上传视频
+                            <li><a class="J_menuItem" href="admin/message?action=show">留言本管理</a>
                             </li>
-                            <li><a class="J_menuItem" href="admin/media/addpict.jsp">上传图片
+                            <!-- 待定
+                            <li><a class="J_menuItem" href="admin/gonggao?action=show">公告管理</a>
                             </li>
-                            <li><a class="J_menuItem" href="admin/media/medias.jsp">媒体列表</a>
-                            </li>
+                             -->
                         </ul>
                     </li>                   
                     <li>
@@ -150,7 +152,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	                            	</a>
 	                        	</li>
 	                        	<li class="dropdown">
-	                            	<a href="admin/login?action=logout" class="fa fa-close">【注销】</a>
+	                            	<a href="admin/logout" class="fa fa-close">【注销】</a>
 	                        	</li>
 	                    	</c:when>
 	                    	<c:otherwise>

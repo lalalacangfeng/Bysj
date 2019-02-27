@@ -47,15 +47,6 @@ public interface MediaDao {
 	
 	
 	/***
-	 * 通过md5值查询视频是否已经上传过
-	 * @param md5
-	 * @return
-	 * @throws Exception
-	 */
-	public String findVedioByMd5(String value) throws Exception;
-	
-	
-	/***
 	 * 查询标题视频是否重复
 	 * @param vedio
 	 * @return
@@ -63,6 +54,7 @@ public interface MediaDao {
 	 */
 	public Boolean IfSameVedio(Vedio vedio) throws Exception;
 	
+	public Boolean IfSamePict(Pict pict) throws Exception;
 	
 	/***
 	 * 获得所有的图片
@@ -72,12 +64,28 @@ public interface MediaDao {
 	public ArrayList<Pict> getAllPicts() throws Exception;
 	
 	/**
-	 * 根据id查询
+	 * 根据id查询视频
 	 * @param id
 	 * @return
 	 * @throws Exception
 	 */
 	public Vedio queryMediaById(int id)throws Exception;
+	
+	/**
+	 * 根据id查找路径
+	 * @param id
+	 * @return
+	 * @throws Exception
+	 */
+	public ArrayList<String> queryVediaSrcById(int id) throws Exception; 
+	
+	/***
+	 * 根据id查找图片路径
+	 * @param id
+	 * @return
+	 * @throws Exception
+	 */
+	public String queryPictSrcById(int id) throws Exception;
 	
 	
 	/***
@@ -87,4 +95,6 @@ public interface MediaDao {
 	 * @throws Exception
 	 */
 	public int delVedio(int id) throws Exception;
+	
+	public int delPict(int id) throws Exception;
 }

@@ -139,7 +139,7 @@ public class ArticleDaoImpl implements ArticleDao {
 	@Override
 	public ArrayList<Article> FindAll() throws Exception {
 		ArrayList<Article> articles = new ArrayList<>();
-		String sql = "select * from article left join `column` on `column`.cid=article.cid";
+		String sql = "select * from article left join `column` on `column`.cid=article.cid  order by nid desc";
 		pstmt = this.con.prepareStatement(sql);
 		rs = pstmt.executeQuery();
 		while (rs.next()) {
@@ -184,7 +184,7 @@ public class ArticleDaoImpl implements ArticleDao {
 	@Override
 	public Article queryBynid(int nid) throws Exception {
 		Article article = new Article();
-		String sql = "select * from article where nid=?";
+		String sql = "select * from article where nid=? order by nid desc";
 		pstmt = this.con.prepareStatement(sql);
 		pstmt.setInt(1, nid);
 		rs = pstmt.executeQuery();

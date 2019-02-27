@@ -29,6 +29,7 @@ public class QuerryAllUer implements Action {
 			ArrayList<User> users = DaoFactory.getUserDaoInstance().FindAll();
 			System.out.println("查询所有用户");
 			request.setAttribute("users", users);
+			request.setAttribute("length", users.size());
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();

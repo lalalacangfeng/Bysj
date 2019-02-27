@@ -59,6 +59,42 @@ public class UploadVedioAction implements Action {
 					ServletContext sctx = request.getServletContext();
 					//获得保存文件的路径
 					String basePath = sctx.getRealPath("videos");
+					
+					File videosfile = new File(basePath);
+					if (videosfile.exists()) {
+						if (videosfile.isDirectory()) {
+							System.out.println("vediosfile是文件夹");
+						}else {
+							 System.out.println("同名的文件存在，不能创建文件夹。");
+						}
+					}else {
+						System.out.println("videosfile文件夹不存在，创建该文件夹。");
+						videosfile.mkdir();
+					}
+					File tempfile = new File(basePath+"/temp/");
+					if (tempfile.exists()) {
+						if (tempfile.isDirectory()) {
+							System.out.println("tempfile是文件夹");
+						}else {
+							System.out.println("tempfile同名的文件存在，不能创建文件夹。");
+						}
+					}else {
+						System.out.println("文件夹不存在，创建该文件夹。");
+						tempfile.mkdir();
+					}
+					File imagesfile = new File(basePath+"/images/");
+					if (imagesfile.exists()) {
+						if (imagesfile.isDirectory()) {
+							System.out.println("imagesfile是文件夹");
+						}else {
+							System.out.println("同名的文件存在，不能创建文件夹。");
+						}
+					}else {
+						System.out.println("imagesfile文件夹不存在，创建该文件夹。");
+						imagesfile.mkdir();
+					}
+					
+					
 					//获得文件名
 					String fileUrl = item.getName();
 					//在某些操作系统上，item.getName()方法会返回文件的完整名称，即包括路径
@@ -78,13 +114,14 @@ public class UploadVedioAction implements Action {
 					
 					if (DaoFactory.getMediaDaoInstance().IfSameVedio(vedio)) {
 						//标题或视频内容重复了
+						break;
 					}else{
 						if (item.getSize()>500*1024*1024) {
 							request.setAttribute("status", "上传失败，文件过大，超过500M");
 						}
 						String codcFilePath = basePath+"/"+serialName+".MP4";//设置转换为flv格式后文件的保存路径
 						String mediaPicPath = basePath+"/images"+File.separator+serialName+".jpg";//设置上传视频截图的保存路径
-						
+						System.out.println("codcFilePath:"+codcFilePath);
 						//获取配置的转换工具（ffmpeg.exe）的存放路径
 						String ffmpegPath = request.getServletContext().getRealPath("/tools/ffmpeg.exe");
 						
@@ -97,12 +134,12 @@ public class UploadVedioAction implements Action {
 					
 				}
 			}
+			System.out.println("-------------------------");
+			String action = request.getParameter("action");
+			System.out.println("upload action:"+action);
+			System.out.println("*************上传结束，flag为："+flag);
+			response.setContentType("text/html;charset=utf-8");
 			if (flag) {
-				System.out.println("-------------------------");
-				String action = request.getParameter("action");
-				System.out.println("upload action:"+action);
-				System.out.println("*************上传结束，flag为："+flag);
-				response.setContentType("text/html;charset=utf-8");
 				//转码成功保存视频
 				int result = DaoFactory.getMediaDaoInstance().saveVedio(vedio);
 				if (result==1) {

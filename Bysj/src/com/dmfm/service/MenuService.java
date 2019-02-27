@@ -22,13 +22,13 @@ public class MenuService implements MenuDao {
 
 	@Override
 	public ArrayList<String> findMenu(int id) throws Exception {
-		// TODO Auto-generated method stub
 		ArrayList<String> menus = new ArrayList<>();
 		try {
 			menus = this.dao.findMenu(id);
 		} catch (Exception e) {
-			// TODO: handle exception
 			e.printStackTrace();
+		} finally{
+			con.close();
 		}
 		return menus;
 	}

@@ -1,6 +1,8 @@
 package com.dmfm.action;
 
 import java.io.IOException;
+import java.sql.Timestamp;
+import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -29,9 +31,13 @@ public class FMLoginServlet extends HttpServlet {
 		try {
 			if (action.equals("login")) {// 如果是登录
 				User user = DaoFactory.getUserDaoInstance().queryByName(uname);// 根据用户名查询用户
+				long time = System.currentTimeMillis();
+
 				if (passwd.equals(user.getPassword())) {// 输入的密码与数据库中的一致
 					request.getSession().setAttribute("username", uname);
 					request.getSession().setAttribute("uid", user.getUid());
+					request.getSession().setAttribute("email", user.getEmail());
+					request.getSession().setAttribute("role", user.getRole());
 					System.out.println("success");
 					response.getWriter().write("{\"ifExist\":1}");
 //					path = "../index.jsp";

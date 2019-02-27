@@ -17,7 +17,6 @@ public class FindallArticleAction implements Action {
 	@Override
 	public String execute(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		try {
 			ArrayList<Article> articles = DaoFactory.getArticleDaoInstance().FindAll();
 			request.getSession().getServletContext().setAttribute("articles", articles);//更新文章列表
@@ -25,7 +24,6 @@ public class FindallArticleAction implements Action {
 					 + "------更新文章列表------\n"
 					 + "----------------------------\n");
 		} catch (Exception e) {
-			// TODO: handle exception
 			e.printStackTrace();
 		}
 		return "article/articles.jsp";

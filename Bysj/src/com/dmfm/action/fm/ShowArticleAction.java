@@ -18,7 +18,6 @@ public class ShowArticleAction implements Action {
 	@Override
 	public String execute(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		Article article = null;
 		ArrayList<Words> words = new ArrayList<>();
 		ArrayList<Reply> replies = new ArrayList<>();

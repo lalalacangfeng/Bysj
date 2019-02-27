@@ -2,6 +2,7 @@ package com.dmjd.action.column;
 
 import java.io.IOException;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,12 +15,12 @@ public class DelColumnAction implements Action {
 	@Override
 	public String execute(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		try {
 			int id = Integer.valueOf(request.getParameter("id"));
 			int pid = Integer.valueOf(request.getParameter("pid"));
 			if (DaoFactory.getColumnDaoInstance().delColumn(id, pid) == 1) {
 				System.out.println("删除成功");
+				
 				request.setAttribute("status", "删除成功");
 			}else {
 				System.out.println("删除失败");
@@ -27,7 +28,6 @@ public class DelColumnAction implements Action {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			// TODO: handle exception
 		}
 		return "column?action=findall";
 	}

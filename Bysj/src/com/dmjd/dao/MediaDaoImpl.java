@@ -258,27 +258,14 @@ public class MediaDaoImpl implements MediaDao {
 	public int savePict(Pict pict) throws Exception {
 		// TODO Auto-generated method stub
 		int result = 0;
-		String sql = "insert into pict(name,descript,src) value(?,?,?)";
+		String sql = "insert into pict(name,descript,src,md5) value(?,?,?,?)";
 		pstmt = this.con.prepareStatement(sql);
 		pstmt.setString(1, pict.getName());
 		pstmt.setString(2, pict.getDescript());
 		pstmt.setString(3, pict.getSrc());
+		pstmt.setString(4, pict.getMd5());
 		result = pstmt.executeUpdate();
 		return result;
-	}
-
-	@Override
-	public String findVedioByMd5(String value) throws Exception {
-		// TODO Auto-generated method stub
-		String md5 = null;
-		String sql = "select * from vedio where md5=?";
-		pstmt = this.con.prepareStatement(sql);
-		pstmt.setString(1, value);
-		rs = pstmt.executeQuery();
-		if (rs.next()) {
-			md5 = rs.getString(7);
-		}
-		return md5;
 	}
 
 	@Override
@@ -305,6 +292,63 @@ public class MediaDaoImpl implements MediaDao {
 		pstmt.setInt(1, id);
 		result = pstmt.executeUpdate();
 		return result;
+	}
+
+	@Override
+	public Boolean IfSamePict(Pict pict) throws Exception {
+		// TODO Auto-generated method stub
+		boolean mask = false;
+		String sql = "select * from pict where  md5=?";
+		pstmt = this.con.prepareStatement(sql);
+		pstmt.setString(1, pict.getMd5());
+		rs = pstmt.executeQuery();
+		if (rs.next()) {
+			mask = true;
+		}
+		return mask;
+	}
+
+	@Override
+	public int delPict(int id) throws Exception {
+		// TODO Auto-generated method stub
+		int result = 0;
+		String sql = "delete from pict where id=?";
+		pstmt = this.con.prepareStatement(sql);
+		pstmt.setInt(1, id);
+		result = pstmt.executeUpdate();
+		return result;
+	}
+
+	@Override
+	public ArrayList<String> queryVediaSrcById(int id) throws Exception {
+		// TODO Auto-generated method stub
+		ArrayList<String> srcs = new ArrayList<>();
+		String src,picture = null;
+		String sql = "select src,picture from vedio where vid=?";
+		pstmt = this.con.prepareStatement(sql);
+		pstmt.setInt(1, id);
+		rs = pstmt.executeQuery();
+		if (rs.next()) {
+			src = rs.getString(1);
+			picture = rs.getString(2);
+			srcs.add(src);
+			srcs.add(picture);
+		}
+		return srcs;
+	}
+
+	@Override
+	public String queryPictSrcById(int id) throws Exception {
+		// TODO Auto-generated method stub
+		String src = null;
+		String sql = "select src from pict where id=?";
+		pstmt = this.con.prepareStatement(sql);
+		pstmt.setInt(1, id);
+		rs = pstmt.executeQuery();
+		if (rs.next()) {
+			src = rs.getString(1);
+		}
+		return src;
 	}
 
 }

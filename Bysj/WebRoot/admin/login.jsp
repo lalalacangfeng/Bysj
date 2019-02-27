@@ -2,8 +2,7 @@
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-System.out.println("basePath:"+basePath);
-System.out.println("Path:"+path);
+
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -47,7 +46,7 @@ System.out.println("Path:"+path);
 				class="form-control pword m-b" placeholder="密码" />
 				<label class="col-sm-3 control-label" name="status" style="color: #FF0000; ">${status }</label>
 				<input type="hidden" name="action" value="login">
-				<input class="btn btn-success btn-block" type="submit" value="登&nbsp;&nbsp;陆" onclick="dologin()">
+				<input class="btn btn-success btn-block" type="button" value="登录" onclick="dologin()"/>
 				<!-- 
 				<button class="btn btn-success btn-block" onclick="dologin()">登录</button>
 				 -->

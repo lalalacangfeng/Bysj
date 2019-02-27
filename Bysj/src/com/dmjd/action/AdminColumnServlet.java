@@ -1,9 +1,11 @@
 package com.dmjd.action;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.dmfm.pojo.Menu;
 import com.dmjd.action.column.AddColumnAction;
 import com.dmjd.action.column.DelColumnAction;
 import com.dmjd.action.column.FindallColumnAction;
@@ -29,14 +32,12 @@ public class AdminColumnServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doPost(request, response);
 	}
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		String action = request.getParameter("action");
 		Action targetAction = null;
 		String path = null;
@@ -47,6 +48,7 @@ public class AdminColumnServlet extends HttpServlet {
 		case "添加":
 			targetAction = new AddColumnAction();
 			path = targetAction.execute(request, response);
+			updateMenu();//更新
 			break;
 		case "findall":
 			targetAction = new FindallColumnAction();
@@ -55,14 +57,17 @@ public class AdminColumnServlet extends HttpServlet {
 		case "edit":
 			targetAction = new InitColumnAction();
 			path = targetAction.execute(request, response);
+			
 			break;
 		case "修改":
 			targetAction = new EditColumnAction();
 			path = targetAction.execute(request, response);
+			updateMenu();//更新
 			break;
 		case "del":
 			targetAction = new DelColumnAction();
 			path = targetAction.execute(request, response);
+			updateMenu();//更新
 			break;
 		default:
 			break;
@@ -91,6 +96,21 @@ public class AdminColumnServlet extends HttpServlet {
 			System.out.println("----------------------------\n"
 					 + "------columns栏目初始化失败------\n"
 					 + "----------------------------\n");
+			e.printStackTrace();
+		}
+	}
+	
+	public void updateMenu(){
+		ServletContext application = this.getServletContext();// 获取application
+		ArrayList<com.dmfm.pojo.Menu> menus;
+		try {
+			menus = com.dmfm.factory.DaoFactory.InitDaoInstance().InitMenus();
+			application.setAttribute("menus", menus);
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}

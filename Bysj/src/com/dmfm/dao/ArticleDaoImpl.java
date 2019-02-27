@@ -40,7 +40,7 @@ public class ArticleDaoImpl implements ArticleDao {
 			menu.setPid(rs.getInt(3));
 			menus.add(menu);
 		}
-		sql = "select * from article where status=0";//暂时查询未发布的新闻。
+		sql = "select * from article where status=1";//查询发布的新闻。
 		pstmt = this.con.prepareStatement(sql);
 		rs = this.pstmt.executeQuery();
 		while (rs.next()) {
@@ -129,7 +129,7 @@ public class ArticleDaoImpl implements ArticleDao {
 		ArrayList<Article> articles = new ArrayList<>();
 		//当传值过来id小于2000，则为一级菜单栏目id；大于2000则为二级
 		if (id < 2000) {
-			sql = "select * from article join `column` on article.cid=`column`.cid and article.cid in (select cid from `column` where kid=? ) and status=0 order by nid desc;";//暂时查询未发布的新闻。
+			sql = "select * from article join `column` on article.cid=`column`.cid and article.cid in (select cid from `column` where kid=? ) and status=1 order by nid desc;";//暂时查询发布的新闻。
 			pstmt = this.con.prepareStatement(sql);
 			pstmt.setInt(1, id);
 			rs = pstmt.executeQuery();
@@ -148,7 +148,7 @@ public class ArticleDaoImpl implements ArticleDao {
 				articles.add(article);
 			}
 		}else if (id > 2000) {
-			sql = "select * from article join `column` on article.cid=`column`.cid and article.cid=? and status=0 order by nid desc;";
+			sql = "select * from article join `column` on article.cid=`column`.cid and article.cid=? and status=1 order by nid desc;";
 			pstmt = this.con.prepareStatement(sql);
 			pstmt.setInt(1, id);
 			rs = pstmt.executeQuery();

@@ -19,7 +19,6 @@ public class MenuDaoImpl implements MenuDao {
 
 	@Override
 	public ArrayList<String> findMenu(int id) throws Exception {
-		// TODO Auto-generated method stub
 		ArrayList<String> menus = new ArrayList<>();
 		String sql = null;
 		if (id < 2000) {

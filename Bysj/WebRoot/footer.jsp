@@ -1,12 +1,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 
 
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
-	<head>   
-	   <title>My JSP 'footer.jsp' starting page</title>
 
-	</head>
 	<!--FOOTER-->
 	<footer class="footer">
 	    <div class="container">
@@ -55,7 +50,5 @@
 	    </div>
 	</footer>
 	<!--END FOOTER-->
-	<script src="js/jquery.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
+
 	</body>
-</html>

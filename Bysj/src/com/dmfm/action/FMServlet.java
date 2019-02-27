@@ -15,14 +15,19 @@ public class FMServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		int servletpath = Integer.valueOf(request.getServletPath().substring(4, request.getServletPath().length()-3));
-		System.out.println("servletpath:" + servletpath);
-		System.out.println("1111:");
+//		int servletpath = Integer.valueOf(request.getServletPath().substring(4, request.getServletPath().length()-3));
+//		System.out.println("servletpath:" + servletpath);
+//		System.out.println("1111:");
+//		request.getContextPath();
 		String path = null;
 		Action targetAction = null;
 		targetAction = new FindFM();
 		path = targetAction.execute(request, response);
-		request.getRequestDispatcher(path).forward(request, response);
+//		System.out.println("path:"+path);
+		if(path.isEmpty()||path==null||path==""){			
+			request.getRequestDispatcher(request.getContextPath()).forward(request, response);			
+		}else{
+			request.getRequestDispatcher(path).forward(request, response);			
+		}
 	}
 }

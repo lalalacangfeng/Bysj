@@ -58,8 +58,9 @@ function checkName() {
 function checkPass() {
     var pwd1 = document.getElementById("passwd1").value;
     var pwd2 = document.getElementById("secpasswd").value;
+
     var passwdstatus = document.getElementById("passwdstatus");
-    if(pwd1.length<6 && pwd1.length>50){
+    if(pwd1.length<6 || pwd1.length>50){
         passwdstatus.innerHTML = "密码长度太短or过长";
         
     }else{
@@ -78,7 +79,7 @@ function checkregister(){
      var uname = document.getElementById("uname").value;
      var pwd1 = document.getElementById("passwd1").value;
      var email = document.getElementById("email").value;
-     if(uname=="" && passwd=="" && email==""){
+     if(uname=="" || passwd=="" || email==""){
          return false;
      }else{
          $.ajax({
@@ -103,11 +104,11 @@ function checkregister(){
 function checklogin(){
     var uname = document.getElementById("loginuname").value;
     var passwd = document.getElementById("passwd").value;
-    if(uname=="" && uname.length<6 && uname.length>15){
+    if(uname=="" || uname.length<6 || uname.length>15){
         alert("请输入用户名or用户名请符合要求！");
     return false;
     }
-    if(passwd==""  && passwd.length<6 && passwd.length>50){
+    if(passwd=="" || passwd.length<6 || passwd.length>50){
         alert("请输入密码or密码太短或太长！");
     return false;
     }
@@ -125,6 +126,70 @@ function checklogin(){
                 } else if (result.ifExist == 1) {
                     alert("登录成功！");
                     parent.location.reload();//parent.location.reload()刷新父亲对象（用于框架）
+                }
+            }
+        });
+    }
+}
+
+function edituserinf(){
+    var uname = document.getElementById("uname").value;
+    var email = document.getElementById("email").value;
+    if(uname=="" || uname.length<6 | uname.length>15){
+        alert("请输入用户名or用户名请符合要求！");
+    return false;
+    }
+    if(email==""  || email.length<6 || email.length>50){
+        alert("请输入正确的邮箱！");
+    return false;
+    }
+    if (uname != null) {
+        $.ajax({
+            type : "post",
+            url : "fm/user?action=editinf",
+            dataType : "json",
+            data : {
+                "uname" : uname,"email":email
+            },
+            success : function(result) {
+                if (result.ifExist == 2) {
+                    alert("修改失败");
+                } else if (result.ifExist == 1) {
+                    alert("修改成功！");
+                    parent.location.reload();//parent.location.reload()刷新父亲对象（用于框架）
+                }else if (result.ifExist == 4) {
+                    alert("验证不通过格式不正确");
+                }
+            }
+        });
+    }
+}
+
+function editpass(){
+    var oldPasswd = document.getElementById("oldPasswd").value;
+    var passwd = document.getElementById("passwd1").value;
+    if(passwd==""  || passwd.length<6 || passwd.length>50){
+        alert("请输入正确的密码！");
+    return false;
+    }
+    if (passwd != null) {
+        $.ajax({
+            type : "post",
+            url : "fm/user?action=editpass",
+            dataType : "json",
+            data : {
+                "passwd" : passwd,"oldPasswd":oldPasswd
+            },
+            success : function(result) {
+                if (result.ifExist == 2) {
+                    alert("修改失败");
+                } else if (result.ifExist == 1) {
+                    alert("修改成功！");
+                    parent.location.reload();//parent.location.reload()刷新父亲对象（用于框架）
+                }else if (result.ifExist == 3) {
+                    alert("原密码不正确");
+                }else if (result.ifExist == 4) {
+                    alert("验证不通过格式不正确");
                 }
             }
         });

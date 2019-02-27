@@ -32,6 +32,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.dmjd.action.media.DelPictAction;
 import com.dmjd.action.media.DelVedioAction;
 import com.dmjd.action.media.FileAction;
 import com.dmjd.action.media.UpdateAction;
@@ -55,19 +56,14 @@ public class AdminMediaServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doPost(req, resp);
 	}
 
 	@Override
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		System.out.println("\n*****上传文件媒体servlet测试*****\n");
 		System.out.println("-----进入后台-----");
-		String serverPath = "D:/Program Files/Tomcat/apache-tomcat-7.0.90/webapps/Dmjd/pict";//保存路径
-		String fileMd5 = null;
-
 
 		String action = request.getParameter("action");
 		Action targetAction = null;
@@ -80,6 +76,7 @@ public class AdminMediaServlet extends HttpServlet {
 			case "vedio":
 				System.out.println("******上传视频******");
 				targetAction = new UploadVedioAction();
+				//在方法UploadVedioAction里面定义了条response.getWriter().write("{\"ifExist\":1}");
 				path = targetAction.execute(request, response);
 				//此处不能用内部跳转，会影响js输出跳转
 //				request.getRequestDispatcher(path).forward(request, response);
@@ -107,10 +104,19 @@ public class AdminMediaServlet extends HttpServlet {
 				request.getRequestDispatcher(path).forward(request, response);
 				break;
 			case "del":
-				System.out.println("删除视频");
-				targetAction = new DelVedioAction();
-				path = targetAction.execute(request, response);
-				request.getRequestDispatcher(path).forward(request, response);
+				String type = request.getParameter("type");
+				System.out.println("type:"+type);
+				if (type.equals("vedio")) {
+					System.out.println("删除视频");
+					targetAction = new DelVedioAction();
+					path = targetAction.execute(request, response);
+					request.getRequestDispatcher(path).forward(request, response);					
+				}else if (type.equals("pict")) {
+					System.out.println("删除图片");
+					targetAction = new DelPictAction();
+					path = targetAction.execute(request, response);
+					request.getRequestDispatcher(path).forward(request, response);					
+				}
 				break;
 			default:
 				break;
@@ -122,13 +128,11 @@ public class AdminMediaServlet extends HttpServlet {
 
 	@Override
 	public void destroy() {
-		// TODO Auto-generated method stub
 		super.destroy();
 	}
 
 	@Override
 	public void init() throws ServletException {
-		// TODO Auto-generated method stub
 		try {
 			ArrayList<Pict> picts = DaoFactory.getMediaDaoInstance().getAllPicts();	
 			ArrayList<Vedio> vedios = DaoFactory.getMediaDaoInstance().getAllMediaCount();	

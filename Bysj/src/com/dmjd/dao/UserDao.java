@@ -26,5 +26,15 @@ public interface UserDao {
 
 	// 根据Email查询用户
 	public User queryByEmail(String email) throws Exception;
+	
+	/**
+	 * 根据id更新登录次数与时间
+	 * @param uid 用户id
+	 * @param number 错误次数
+	 * @param misstime 允许登录时间
+	 * @return 1
+	 * @throws Exception
+	 */
+	public int resetNumberAndTime(int uid, int number, String misstime) throws Exception;
 
 }

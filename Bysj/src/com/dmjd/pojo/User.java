@@ -12,9 +12,12 @@ public class User implements Serializable {
 	private int uid;//编号
 	private String username;//用户名
 	private String password;//密码
-	private Date lasttime;//最后登录时间
+	private String lasttime;//最后登录时间
 	private String Email;//邮箱
 	private int role;//权限等级
+	private String createtime;//创建时间
+	private int missnumber;//错误次数
+	private String misstime;//允许登录时间
 	
 	public  int getRole() {
 		return role;
@@ -61,12 +64,36 @@ public class User implements Serializable {
 		this.password = password;
 	}
 
-	public  Date getLasttime() {
+	public  String getLasttime() {
 		return lasttime;
 	}
 
-	public  void setLasttime(Date lasttime) {
+	public  void setLasttime(String lasttime) {
 		this.lasttime = lasttime;
+	}
+
+	public String getCreatetime() {
+		return createtime;
+	}
+
+	public void setCreatetime(String createtime) {
+		this.createtime = createtime;
+	}
+
+	public int getMissnumber() {
+		return missnumber;
+	}
+
+	public void setMissnumber(int missnumber) {
+		this.missnumber = missnumber;
+	}
+
+	public String getMisstime() {
+		return misstime;
+	}
+
+	public void setMisstime(String misstime) {
+		this.misstime = misstime;
 	}
 
 }

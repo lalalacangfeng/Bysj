@@ -22,26 +22,26 @@ public class UserService implements UserDao {
 	
 	@Override
 	public User queryByName(String username) throws Exception {
-		// TODO Auto-generated method stub
 		User user = new User();
 		try {
 			user = this.dao.queryByName(username);
 		} catch (Exception e) {
-			// TODO: handle exception
 			e.printStackTrace();
+		} finally{
+			con.close();
 		}
 		return user;
 	}
 
 	@Override
 	public int register(User user) throws Exception {
-		// TODO Auto-generated method stub
 		int result = 0;
 		try {
 			result = this.dao.register(user);
 		} catch (Exception e) {
-			// TODO: handle exception
 			e.printStackTrace();
+		} finally{
+			con.close();
 		}
 		return result;
 	}
@@ -49,13 +49,13 @@ public class UserService implements UserDao {
 
 	@Override
 	public int checkName(String username) throws Exception {
-		// TODO Auto-generated method stub
 		int result = 0;
 		try {
 			result = this.dao.checkName(username);
 		} catch (Exception e) {
-			// TODO: handle exception
 			e.printStackTrace();
+		} finally{
+			con.close();
 		}
 		return result;
 	}
@@ -63,13 +63,56 @@ public class UserService implements UserDao {
 
 	@Override
 	public int checkEmail(String email) throws Exception {
-		// TODO Auto-generated method stub
 		int result = 0;
 		try {
 			result = this.dao.checkEmail(email);
 		} catch (Exception e) {
-			// TODO: handle exception
 			e.printStackTrace();
+		} finally{
+			con.close();
+		}
+		return result;
+	}
+
+
+	@Override
+	public int resetNumberAndTime(int uid, int number, String misstime)
+			throws Exception {
+		int result = 0;
+		try {
+			result = this.dao.resetNumberAndTime(uid, number, misstime);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally{
+			con.close();
+		}
+		return result;
+	}
+
+
+	@Override
+	public int editinf(User user) throws Exception {
+		int result = 0;
+		try {
+			result = this.dao.editinf(user);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally{
+			con.close();
+		}
+		return result;
+	}
+
+
+	@Override
+	public int editpass(String pass,int uid) throws Exception {
+		int result = 0;
+		try {
+			result = this.dao.editpass(pass,uid);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally{
+			con.close();
 		}
 		return result;
 	}

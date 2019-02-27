@@ -17,7 +17,7 @@ import com.dmjd.action.user.ShowUserAction;
 
 @WebServlet(
 		urlPatterns = { "/admin/user" },
-		name = "userServlet"
+		name = "adminuserServlet"
 )
 public class AdminUserSetvlet extends HttpServlet {
 
@@ -54,36 +54,43 @@ public class AdminUserSetvlet extends HttpServlet {
 			targetAction = new ShowUserAction();
 			path = targetAction.execute(request, response);
 			System.out.println("path:"+path);
+//			response.sendRedirect(path);
+			request.getRequestDispatcher(path).forward(request, response);
 			break;
 		case "edit":
 			System.out.println("进入修改用户页面");
 			targetAction = new EditUserAction();
 			path = targetAction.execute(request, response);
+			request.getRequestDispatcher(path).forward(request, response);
 			break;
 		case "editinf":
 			System.out.println("修改用户信息");
 			targetAction = new EditinfUserAction();
 			System.out.println("path:"+path);
 			path = targetAction.execute(request, response);
+			request.getRequestDispatcher(path).forward(request, response);
 			break;
 		case "editpasswd":
 			System.out.println("修改用户密码");
 			targetAction = new EditPasswdAction();
 			path = targetAction.execute(request, response);
+			request.getRequestDispatcher(path).forward(request, response);
 			break;
 		case "list":
 			System.out.println("显示用户列表");
 			targetAction = new QuerryAllUer();
 			path = targetAction.execute(request, response);
+			request.getRequestDispatcher(path).forward(request, response);
 			break;
 		default:
 			System.out.println("找不到匹配项");
 			path = "index.jsp";
+			request.getRequestDispatcher(path).forward(request, response);
 			break;
 		}
 		
 		
-		request.getRequestDispatcher(path).forward(request, response);
+
 
 	}
 

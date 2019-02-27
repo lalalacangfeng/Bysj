@@ -118,7 +118,7 @@ public class InitDaoImpl implements InitDao{
 	 */
 	private ArrayList<Article> findArticles() throws Exception{
 		ArrayList<Article> articles = new ArrayList<Article>();
-		String sql = "select * from `article` where status=0 order by nid desc";//暂时查询未发布的新闻。
+		String sql = "select * from `article` where status=1 order by nid desc";//暂时查询未发布的新闻。
 		pstmt = this.con.prepareStatement(sql);
 		rs = pstmt.executeQuery();
 		while (rs.next()) {

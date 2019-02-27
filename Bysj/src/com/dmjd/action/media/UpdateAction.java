@@ -45,9 +45,10 @@ public class UpdateAction implements Action {
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
+			e.printStackTrace();
 		}
 		
-		return "media/vedios.jsp";
+		return "media/medias.jsp";
 	}
 
 }

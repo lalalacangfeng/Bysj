@@ -23,7 +23,6 @@ public class ArticleService implements ArticleDao {
 	
 	@Override
 	public int addArticle(Article article) throws Exception {
-		// TODO Auto-generated method stub
 		int result = 0;
 		try {
 			result = this.dao.addArticle(article);
@@ -38,7 +37,6 @@ public class ArticleService implements ArticleDao {
 
 	@Override
 	public Article queryBynid(int nid) throws Exception {
-		// TODO Auto-generated method stub
 		Article article = new Article();
 		try {
 			article = this.dao.queryBynid(nid);
@@ -53,7 +51,6 @@ public class ArticleService implements ArticleDao {
 
 	@Override
 	public int editArticle(int nid, Article article) throws Exception {
-		// TODO Auto-generated method stub
 		int result = 0;
 		try {
 			result = this.dao.editArticle(nid, article);
@@ -68,7 +65,6 @@ public class ArticleService implements ArticleDao {
 
 	@Override
 	public int deleteArticle(int nid) throws Exception {
-		// TODO Auto-generated method stub
 		int result = 0;
 		try {
 			result = this.dao.deleteArticle(nid);
@@ -83,7 +79,6 @@ public class ArticleService implements ArticleDao {
 
 	@Override
 	public ArrayList<Article> FindAll() throws Exception {
-		// TODO Auto-generated method stub
 		ArrayList<Article> articles = new ArrayList<>();
 		try {
 			articles = this.dao.FindAll();
@@ -98,7 +93,7 @@ public class ArticleService implements ArticleDao {
 
 	@Override
 	public ArrayList<Article> queryBytitle(String title) throws Exception {
-		// TODO Auto-generated method stub
+		
 		ArrayList<Article> articles = new ArrayList<>();
 		try {
 			articles = this.dao.queryBytitle(title);
@@ -113,7 +108,7 @@ public class ArticleService implements ArticleDao {
 
 	@Override
 	public int releaseArticle(int nid) throws Exception {
-		// TODO Auto-generated method stub
+		
 		int result = 0;
 		try {
 			result = this.dao.releaseArticle(nid);
@@ -128,7 +123,6 @@ public class ArticleService implements ArticleDao {
 
 	@Override
 	public int cancelArticle(int nid) throws Exception {
-		// TODO Auto-generated method stub
 		int result = 0;
 		try {
 			result = this.dao.cancelArticle(nid);

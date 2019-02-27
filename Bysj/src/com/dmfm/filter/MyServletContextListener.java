@@ -30,7 +30,6 @@ public class MyServletContextListener implements ServletContextListener {
 
 	@Override
 	public void contextInitialized(ServletContextEvent sce) {
-		// TODO Auto-generated method stub
 		//通过servletContextEvent获得ServletContext对象
 		try {
 			ServletContext context = sce.getServletContext();

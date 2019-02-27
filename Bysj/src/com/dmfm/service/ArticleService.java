@@ -25,7 +25,6 @@ public class ArticleService implements ArticleDao {
 
 	@Override
 	public ArrayList<Menu> findAllArticles() throws Exception {
-		// TODO Auto-generated method stub
 		ArrayList<Menu> menus = new ArrayList<Menu>();
 		try {
 			menus = this.dao.findAllArticles();
@@ -40,7 +39,6 @@ public class ArticleService implements ArticleDao {
 
 	@Override
 	public Article queryById(int id) throws Exception {
-		// TODO Auto-generated method stub
 		Article article = new Article();
 		try {
 			article = this.dao.queryById(id);
@@ -55,7 +53,6 @@ public class ArticleService implements ArticleDao {
 
 	@Override
 	public String detail(int id) throws Exception {
-		// TODO Auto-generated method stub
 		String content = null;
 		try {
 			content = this.dao.detail(id);
@@ -70,7 +67,6 @@ public class ArticleService implements ArticleDao {
 
 	@Override
 	public ArrayList<Article> findArticles(int id) throws Exception {
-		// TODO Auto-generated method stub
 		ArrayList<Article> articles = new ArrayList<>();
 		try {
 			articles = this.dao.findArticles(id);
@@ -85,7 +81,6 @@ public class ArticleService implements ArticleDao {
 
 	@Override
 	public int saveWords(Words words) throws Exception {
-		// TODO Auto-generated method stub
 		int result = 0;
 		try {
 			result = this.dao.saveWords(words);
@@ -100,7 +95,6 @@ public class ArticleService implements ArticleDao {
 
 	@Override
 	public int saveReply(Reply reply) throws Exception {
-		// TODO Auto-generated method stub
 		int result = 0;
 		try {
 			result = this.dao.saveReply(reply);
@@ -115,7 +109,6 @@ public class ArticleService implements ArticleDao {
 
 	@Override
 	public ArrayList<Words> findByWords() throws Exception {
-		// TODO Auto-generated method stub
 		ArrayList<Words> words = new ArrayList<>();
 		try {
 			words = this.dao.findByWords();
@@ -128,7 +121,6 @@ public class ArticleService implements ArticleDao {
 
 	@Override
 	public ArrayList<Reply> findByReply() throws Exception {
-		// TODO Auto-generated method stub
 		ArrayList<Reply> replies = new ArrayList<>();
 		try {
 			replies = this.dao.findByReply();

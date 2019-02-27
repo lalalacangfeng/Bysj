@@ -115,5 +115,19 @@ public class UserService implements UserDao {
 		return user;
 	}
 
+	@Override
+	public int resetNumberAndTime(int uid, int number, String misstime)
+			throws Exception {
+		int result = 0;
+		try {
+			result = this.dao.resetNumberAndTime(uid, number, misstime);
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			this.con.close();
+		}
+		return result;
+	}
+
 
 }

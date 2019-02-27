@@ -73,7 +73,6 @@ public class Article {
 	}
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
 		return "nid:"+nid+" title:"+title+" cid:"+cid
 				+"profile:"+profile+" src:"+src
 				+"cname:"+cname;

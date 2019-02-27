@@ -8,6 +8,7 @@ public class Pict {
 	private int lenid;//公有id
 	private String descript;//描述
 	private String author;
+	private String md5;
 	public int getId() {
 		return id;
 	}
@@ -41,7 +42,19 @@ public class Pict {
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
-		return "id:"+id+" name:"+name+" descript:"+ descript+" src:"+src;
+		return "id:"+id+" name:"+name+" descript:"+ descript+" src:"+src+" md5:"+md5;
+	}
+	public String getAuthor() {
+		return author;
+	}
+	public void setAuthor(String author) {
+		this.author = author;
+	}
+	public String getMd5() {
+		return md5;
+	}
+	public void setMd5(String md5) {
+		this.md5 = md5;
 	}
 	
 }

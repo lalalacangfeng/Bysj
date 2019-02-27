@@ -3,7 +3,9 @@ package com.dmjd.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Vector;
 
@@ -34,7 +36,7 @@ public class UserDaoImpl implements UserDao {
 			user.setUid(rs.getInt(1));
 			user.setUsername(rs.getString(2));
 			user.setEmail(rs.getString(4));
-			user.setLasttime(rs.getDate(5));//有需要改动
+			user.setLasttime(rs.getString(5));//有需要改动
 			user.setRole(rs.getInt(6));
 			System.out.println("用户权限:"+user.getRole());
 			System.out.println("最后登录时间："+user.getLasttime());
@@ -50,6 +52,7 @@ public class UserDaoImpl implements UserDao {
 	 */
 	@Override
 	public int addUser(User user) throws Exception {
+		// XXX 没用等待删除修改
 		int result = 0;
 		String sql = "insert into users(username, password, email, lastlogin) values(?,?,?,now())";
 		pstmt = this.con.prepareStatement(sql);
@@ -122,12 +125,48 @@ public class UserDaoImpl implements UserDao {
 			user.setUsername(rs.getString(2));
 			user.setPassword(rs.getString(3));
 			user.setEmail(rs.getString(4));
-			user.setLasttime(rs.getDate(5));
+			user.setLasttime(rs.getString(5));
 			user.setRole(rs.getInt(6));
+			user.setCreatetime(rs.getString(7));
+			user.setMissnumber(rs.getInt(8));
+			user.setMisstime(rs.getString(9));
 		}
 		rs.close();
 		pstmt.close();
 		return user;
+	}
+	
+	/**
+	 * 根据id更新登录次数与时间
+	 * @throws Exception
+	 */
+	public int resetNumberAndTime(int uid, int number, String misstime) throws Exception{
+		int result = 0;
+		Long now = System.currentTimeMillis();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Date time = sdf.parse(sdf.format(now));//当前时间
+		
+		String sql = "update users set missnumber=?, misstime=? where uid=?";
+		pstmt = this.con.prepareStatement(sql);
+		if (number < 5 && time.after(sdf.parse(misstime))) {
+			//misstime为允许登录时间，当前时间必须大于他才可以登录
+			pstmt.setInt(1, ++number);
+			pstmt.setString(2, misstime);
+			System.out.println("number:"+number+"misstime:"+misstime);
+			System.out.println("uid:"+uid);
+			pstmt.setInt(3, uid);
+			result = pstmt.executeUpdate();
+		}else if (number >= 5 || time.before(sdf.parse(misstime))) {
+			pstmt.setInt(1, 0);
+			pstmt.setString(2, sdf.format(now));
+			System.out.println("number:"+number+"misstime:"+sdf.format(now));
+			System.out.println("uid:"+uid);
+			pstmt.setInt(3, uid);
+			result = pstmt.executeUpdate();
+		}
+		pstmt.close();
+		return result;
+		
 	}
 
 	/***
@@ -145,7 +184,7 @@ public class UserDaoImpl implements UserDao {
 			user.setUsername(rs.getString(2));
 			user.setPassword(rs.getString(3));
 			user.setEmail(rs.getString(4));
-			user.setLasttime(rs.getDate(5));
+			user.setLasttime(rs.getString(5));
 			user.setRole(rs.getInt(6));
 		}
 		rs.close();
