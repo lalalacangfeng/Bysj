@@ -38,8 +38,8 @@ public class UserDaoImpl implements UserDao {
 			user.setEmail(rs.getString(4));
 			user.setLasttime(rs.getString(5));//有需要改动
 			user.setRole(rs.getInt(6));
-			System.out.println("用户权限:"+user.getRole());
-			System.out.println("最后登录时间："+user.getLasttime());
+//			System.out.println("用户权限:"+user.getRole());
+//			System.out.println("最后登录时间："+user.getLasttime());
 			users.add(user);//将数据结果添加到用户列表中
 		}
 		rs.close();
@@ -190,5 +190,16 @@ public class UserDaoImpl implements UserDao {
 		rs.close();
 		pstmt.close();
 		return user;
+	}
+	
+	public int updateRole(int id,int role) throws Exception{
+		int result = 0;
+		String sql = "update users set role=? where uid=?";
+		pstmt = con.prepareStatement(sql);
+		pstmt.setInt(1, role);
+		pstmt.setInt(2, id);
+		result = pstmt.executeUpdate();
+		pstmt.close();
+		return result;
 	}
 }

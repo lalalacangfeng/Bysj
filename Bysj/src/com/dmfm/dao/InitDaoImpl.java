@@ -35,8 +35,8 @@ public class InitDaoImpl implements InitDao{
 		ArrayList<Menu> first = findFirst();//一级菜单
 		ArrayList<Menu> second = findSecond();//二级菜单
 		ArrayList<Article> articles = findArticles();//新闻
-		ArrayList<Vedio> vedios = findVedios();//视频
-		ArrayList<Pict> picts = findPicts();//图片
+//		ArrayList<Vedio> vedios = findVedios();//视频
+//		ArrayList<Pict> picts = findPicts();//图片
 		
 		//将一级菜单存入将要输出的菜单中
 		for (Menu menu : first) {
@@ -49,14 +49,14 @@ public class InitDaoImpl implements InitDao{
 		}
 		
 		//将图片存入一级菜单中
-		for (Menu menu : menus) {
-			menu.setChildPicts(getChildPicts(menu.getId(), picts));
-		}
+//		for (Menu menu : menus) {
+//			menu.setChildPicts(getChildPicts(menu.getId(), picts));
+//		}
 		
 		//将视频存放到一级菜单中
-		for (Menu menu : menus) {
-			menu.setChildVedios(getChildVedios(menu.getId(), vedios));
-		}
+//		for (Menu menu : menus) {
+//			menu.setChildVedios(getChildVedios(menu.getId(), vedios));
+//		}
 
 		return menus;
 	}
@@ -83,7 +83,7 @@ public class InitDaoImpl implements InitDao{
 		}
 		rs.close();
 		pstmt.close();
-		System.out.println("查询1栏目完毕");
+//		System.out.println("查询1栏目完毕");
 		return menus;
 	}
 	
@@ -107,7 +107,7 @@ public class InitDaoImpl implements InitDao{
 		}
 		rs.close();
 		pstmt.close();
-		System.out.println("查询2栏目完毕");
+//		System.out.println("查询2栏目完毕");
 		return menus;
 	}
 	
@@ -277,12 +277,12 @@ public class InitDaoImpl implements InitDao{
 	public String setProfile(String html) {
 		String text = Jsoup.parse(html).text();
 		if (text.length() == 0) {
-			System.out.println("没有文字");
+//			System.out.println("没有文字");
 		}else if (text.length() <= 40) {
-			System.out.println("不到40");
+//			System.out.println("不到40");
 			text = text.substring(0, text.length());
 		}else{
-			System.out.println("截图前40");
+//			System.out.println("截图前40");
 			text = text.substring(0, 40)+"...";
 		}
 		return text;
@@ -299,7 +299,7 @@ public class InitDaoImpl implements InitDao{
 		ArrayList<String> srcs = new ArrayList<>();
 		int i = 0;
 		//获得图片地址
-		System.out.println("----获得图片地址----");
+//		System.out.println("----获得图片地址----");
 		for (Element element : elements) {
 			String src = element.attr("src");//获取到src的值
 //			System.out.println("src:"+src);

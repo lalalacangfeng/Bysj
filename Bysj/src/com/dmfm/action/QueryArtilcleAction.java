@@ -20,7 +20,7 @@ public class QueryArtilcleAction implements Action {
 		try {
 			articles = DaoFactory.getArticleDaoInstance().queryBytitle(title);
 			if(articles!=null){
-				request.getSession().setAttribute("fm_Menu","查询结果");
+				request.getSession().setAttribute("fm_Menu","查询结果:"+title);
 				request.setAttribute("fm_articles", articles);
 				System.out.println("查询fm_articles成功");
 			}

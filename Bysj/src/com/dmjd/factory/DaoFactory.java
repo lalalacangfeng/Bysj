@@ -4,10 +4,12 @@ import java.sql.SQLException;
 
 import com.dmjd.dao.ArticleDao;
 import com.dmjd.dao.ColumnDao;
+import com.dmjd.dao.GonggaoDao;
 import com.dmjd.dao.MediaDao;
 import com.dmjd.dao.UserDao;
 import com.dmjd.service.ArticleService;
 import com.dmjd.service.ColumnService;
+import com.dmjd.service.GonggaoService;
 import com.dmjd.service.MediaService;
 import com.dmjd.service.UserService;
 
@@ -30,5 +32,10 @@ public class DaoFactory {
 	//取得Media业务操作类
 	public static MediaDao getMediaDaoInstance() throws SQLException,ClassNotFoundException{
 		return new MediaService();
+	}
+	
+	//取得公告业务
+	public static GonggaoDao getGonggaoDaoInstance() throws SQLException, ClassNotFoundException{
+		return new GonggaoService();
 	}
 }

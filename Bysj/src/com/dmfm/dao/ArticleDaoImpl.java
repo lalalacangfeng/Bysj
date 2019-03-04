@@ -263,12 +263,12 @@ public class ArticleDaoImpl implements ArticleDao {
 	public String setProfile(String html) {
 		String text = Jsoup.parse(html).text();
 		if (text.length() == 0) {
-			System.out.println("没有文字");
+//			System.out.println("没有文字");
 		}else if (text.length() <= 40) {
-			System.out.println("不到40");
+//			System.out.println("不到40");
 			text = text.substring(0, text.length());
 		}else{
-			System.out.println("截图前40");
+//			System.out.println("截图前40");
 			text = text.substring(0, 40)+"...";
 		}
 		return text;
@@ -288,7 +288,7 @@ public class ArticleDaoImpl implements ArticleDao {
 		System.out.println("----获得图片地址----");
 		for (Element element : elements) {
 			String src = element.attr("src");//获取到src的值
-			System.out.println("src:"+src);
+//			System.out.println("src:"+src);
 //			String imgUrl = src.replace("/Dmjd", "D:\\Program Files\\Tomcat\\apache-tomcat-7.0.90\\webapps\\Dmjd");
 			srcs.add(i,src);
 			i++;
@@ -298,7 +298,7 @@ public class ArticleDaoImpl implements ArticleDao {
 			return null;
 		}else {
 			for (String string : srcs) {
-				System.out.println("string:"+string);
+//				System.out.println("string:"+string);
 			}				
 			return srcs.get(0);
 		}

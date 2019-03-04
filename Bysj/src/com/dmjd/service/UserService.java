@@ -129,5 +129,16 @@ public class UserService implements UserDao {
 		return result;
 	}
 
+	@Override
+	public int updateRole(int id, int role) throws Exception {
+		int result = 0;
+		try {
+			result = this.dao.updateRole(id, role);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+
 
 }

@@ -14,6 +14,7 @@ import com.dmjd.action.user.EditUserAction;
 import com.dmjd.action.user.EditinfUserAction;
 import com.dmjd.action.user.QuerryAllUer;
 import com.dmjd.action.user.ShowUserAction;
+import com.dmjd.action.user.UpdateUser;
 
 @WebServlet(
 		urlPatterns = { "/admin/user" },
@@ -79,6 +80,12 @@ public class AdminUserSetvlet extends HttpServlet {
 		case "list":
 			System.out.println("显示用户列表");
 			targetAction = new QuerryAllUer();
+			path = targetAction.execute(request, response);
+			request.getRequestDispatcher(path).forward(request, response);
+			break;
+		case "update":
+			System.out.println("更新用户权限");
+			targetAction = new UpdateUser();
 			path = targetAction.execute(request, response);
 			request.getRequestDispatcher(path).forward(request, response);
 			break;

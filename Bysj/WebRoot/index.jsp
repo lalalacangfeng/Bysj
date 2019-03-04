@@ -67,15 +67,15 @@
 	<script type="text/javascript">
 		!function($) {
 			$(function() {
-				$('#MyCarousel').carousel()
+				$('#head').carousel()
 			})
 		}(window.jQuery)
 	</script>
 
 	<!--返回顶部-->
-	<a id="scrollUp" href="#MyCarousel"
+	<a id="scrollUp" href="#head"
 		style="position: fixed; z-index: 2147483647; display: block;"> <img
-		src="images/btn_uptotop.png" alt="btn_UpToTop" /></a>
+		src="img/btn_uptotop.png" alt="btn_UpToTop" /></a>
 	<!--END 返回顶部-->
 </body>
 </html>

@@ -33,7 +33,6 @@ public class MyServletContextAttributeListener implements
 
 	@Override
 	public void attributeReplaced(ServletContextAttributeEvent arg0) {
-		// TODO Auto-generated method stub
 		ServletContext context = arg0.getServletContext();
 		log.debug("重新初始化");
 		System.out.println("chongxingchushihua");
@@ -43,13 +42,10 @@ public class MyServletContextAttributeListener implements
 			context.setAttribute("menus", menus);
 			
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		System.out.println("----------------");

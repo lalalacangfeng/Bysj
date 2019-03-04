@@ -4,6 +4,7 @@
 	String basePath = request.getScheme() + "://"
 			+ request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
+	System.out.println("path:"+path+"   basePath:"+basePath);
 %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
@@ -67,11 +68,7 @@
 		<jsp:include page="../footer.jsp"></jsp:include>
 	</div>
 	
-	<!-- Peity -->
-	<script src="/Dmjd/js/plugins/peity/jquery.peity.min.js"></script>
-
-	<!-- Fancy box -->
-	<script src="/Dmjd/js/plugins/fancybox/jquery.fancybox.js"></script>
-
+	<script src="js/jquery.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
 </body>
 </html>

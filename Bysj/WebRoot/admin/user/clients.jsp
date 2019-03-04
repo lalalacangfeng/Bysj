@@ -68,38 +68,55 @@
 																	<!-- 邮箱图标 -->
 																	<td><c:out value="${user.email }"></c:out></td>
 																	<!-- 邮箱 -->
+																	
+																	<td class="client-status">
+																	
+																	<c:choose>
+																		<c:when test="${user.role == 0 }">
+																			<span class="label label-danger">超级管理员</span>
+																		</c:when>
+																		<c:when test="${user.role == 2 }">
+																			<a href="admin/user?action=update&id=${user.uid }&role=3" onclick="return confirm('确定降低权限？')">
+																				<span class="label label-primary">已验证</span>
+																			</a>
+																		</c:when>
+																		<c:otherwise>
+																			<a href="admin/user?action=update&id=${user.uid }&role=2" onclick="return confirm('确定提升权限？')">
+																				<span class="label label-warning">未验证</span>
+																			</a>
+																		</c:otherwise>
+																	</c:choose>
+																	
+																	</td>
+																	
+																	<!-- 
 																	<c:choose>
 																		<c:when test="${user.role == 1 }">
 																			<td class="client-status"><span
 																				class="label label-success">管理员</span></td>
-																			<!-- 验证状态 -->
 																		</c:when>
 																		<c:when test="${user.role == 2 }">
 																			<td class="client-status"><span
 																				class="label label-primary">已验证</span></td>
-																			<!-- 验证状态 -->
 																		</c:when>
 																		<c:when test="${user.role == 3 }">
 																			<td class="client-status"><span
 																				class="label label-warning">等待验证</span></td>
-																			<!-- 验证状态 -->
 																		</c:when>
 																		<c:when test="${user.role == 4 }">
 																			<td class="client-status"><span
 																				class="label label-info">未验证</span></td>
-																			<!-- 验证状态 -->
 																		</c:when>
 																		<c:when test="${user.role == 5 }">
 																			<td class="client-status"><span
 																				class="label label-white">已删除</span></td>
-																			<!-- 验证状态 -->
 																		</c:when>
 																		<c:otherwise>
 																			<td class="client-status"><span
 																				class="label label-danger">超级管理员</span></td>
-																			<!-- 验证状态 -->
 																		</c:otherwise>
 																	</c:choose>
+																	 -->
 																</tr>
 															</c:forEach>
 														</tbody>

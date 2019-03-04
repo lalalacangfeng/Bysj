@@ -21,20 +21,15 @@ public interface UserDao {
 	//查询所有用户
 	public ArrayList<User> FindAll() throws Exception;
 
+	
+	//修改用户权限
+	public int updateRole(int id,int role) throws Exception;
+	
 	// 根据用户名查询用户
 	public User queryByName(String username) throws Exception;
-
+	
 	// 根据Email查询用户
 	public User queryByEmail(String email) throws Exception;
-	
-	/**
-	 * 根据id更新登录次数与时间
-	 * @param uid 用户id
-	 * @param number 错误次数
-	 * @param misstime 允许登录时间
-	 * @return 1
-	 * @throws Exception
-	 */
 	public int resetNumberAndTime(int uid, int number, String misstime) throws Exception;
 
 }

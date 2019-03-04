@@ -45,10 +45,10 @@ import com.dmjd.pojo.Column;
 import com.dmjd.pojo.Pict;
 import com.dmjd.pojo.Vedio;
 
-@WebServlet(
-		name = "mediaServlet", 
-		loadOnStartup=3,
-		urlPatterns = { "/admin/media" })
+//@WebServlet(
+//		name = "mediaServlet", 
+//		loadOnStartup=3,
+//		urlPatterns = { "/admin/media" })
 public class AdminMediaServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;

@@ -71,12 +71,12 @@
 			</ul>
 
 			<ul class="nav navbar-nav navbar-right">
-				<!-- 待定
+				<!-- 公告-->
 				<li role="presentation"><a>
 				<button type="button" data-toggle="modal" data-target="#gonggao"
 									style="background-color: transparent; border: 0;">公告</button>
 									</a></li>
-				 -->
+				
 				<c:choose>
 					<c:when test="${username != null }">
 						<!-- 用户存在 -->
@@ -319,7 +319,7 @@
 				<div id="gonggao" class="modal fade">
 					<div class="modal-dialog">
 						<c:choose>
-							<c:when test="${not empty gonggao }">
+							<c:when test="${empty gonggao and gonggao.title=='' and gonggao.content=='' }">
 								<div class="modal-content">
 									<div class="modal-body">
 										<button class="close" data-dismiss="modal">
@@ -327,10 +327,10 @@
 										</button>
 									</div>
 									<div class="modal-title">
-										<h1 class="text-center">${gonggao.title }</h1>
+										<h1 class="text-center"></h1>
 									</div>
 									<div class="modal-body">
-										<label for="">${gonggao.content }</label>
+										<label for="">暂无新公告</label>
 									</div>
 								</div>
 							</c:when>
@@ -345,7 +345,7 @@
 										<h1 class="text-center">${gonggao.title }</h1>
 									</div>
 									<div class="modal-body">
-										<label for="">暂无新公告</label>
+										<label for="">${gonggao.content }</label>
 									</div>
 								</div>
 								

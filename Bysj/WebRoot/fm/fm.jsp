@@ -27,6 +27,15 @@
 <link rel="stylesheet" href="css/style.css">
 <link rel="shortcut icon" href="img/comicfm.ico">
 <link href="js/plugins/fancybox/jquery.fancybox.css" rel="stylesheet">
+
+<link rel="shortcut icon" href="favicon.ico">
+<link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+<link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+
+<!-- Data Tables -->
+<link href="css/plugins/dataTables/dataTables.bootstrap.css"
+	rel="stylesheet">
+
 <style>
 .fancybox img {
 	margin-bottom: 5px;
@@ -36,6 +45,9 @@
 <style>
 .modal-backdrop {
 	z-index: 0;
+}
+td{
+	word-wrap:break-word;word-break:break-all;
 }
 </style>
 </head>
@@ -84,34 +96,13 @@
 								</div>
 							</c:forEach>
 						</c:when>
-						<c:when test="${not empty fm_picts }">
-							<div class="ibox-content">
-								<c:forEach items="${fm_picts }" var="pict" varStatus="status">
-									<a class="fancybox" href="/Dmjd/${pict.src }"
-										title="${pict.name }"><img src="/Dmjd/${pict.src }"
-										alt="${pict.name }" /></a>
-								</c:forEach>
-							</div>
-						</c:when>
-						<c:when test="${not empty fm_vedios }">
-							<c:forEach items="${fm_vedios }" var="vedio" varStatus="status">
-								<div class="item">
-									<a href="fm/vedio?action=show&id=${vedio.id }" class="thumbnail">
-										<img alt="${vedio.name }" src="/Dmjd/${vedio.picture }">
-									</a>
-									<div class="item-intro" style=" text-align:center">
-										<h5 class="item-title">
-											<strong>${vedio.name }</strong>
-										</h5>
-										<p class="item-source">来源：DmFM</p>
-										<c:if test="${vedio.time != null }">
-											<p class="item-time">
-												<span class="glyphicon glyphicon-time"></span> ${vedio.time }
-											</p>
-										</c:if>
-									</div>
-								</div>
-							</c:forEach>
+						
+						
+						<c:when test="${not empty messages }">
+							<jsp:include page="showMessage.jsp" />
+
+							<jsp:include page="inputMessage.jsp" />
+							
 						</c:when>
 					</c:choose>
 				</div>
@@ -123,21 +114,64 @@
 		<jsp:include page="../footer.jsp"></jsp:include>
 	</div>
 
+	<script src="js/jquery.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<!-- Data Tables -->
+	<script src="js/plugins/dataTables/jquery.dataTables.js"></script>
+	<script src="js/plugins/dataTables/dataTables.bootstrap.js"></script>
 
-
-	<!-- Peity -->
-	<script src="/Dmjd/js/plugins/peity/jquery.peity.min.js"></script>
-
-	<!-- Fancy box -->
-	<script src="/Dmjd/js/plugins/fancybox/jquery.fancybox.js"></script>
-
-	<script type="text/javascript">
+	<!-- Page-Level Scripts -->
+	<script>
 		$(document).ready(function() {
-			$('.fancybox').fancybox({
-				openEffect : 'none',
-				closeEffect : 'none'
+			$('.dataTables-example').dataTable({
+				/*规定某列不排序
+				　　columnDefs:[{
+				　　　　'targets' : [0,1],    //除第六，第七两列外，都默认不排序
+				　　　　'orderable' : false
+				　　}]
+				*/
+				//禁止排序
+				'ordering':false,
 			});
 		});
+	</script>
+	<script>
+		function inputmessage(){
+			var title = document.getElementById("title").value;
+		  	var messcontent = document.getElementById("messcontent").value;
+		  	var author = document.getElementById("author").value;
+		  	console.log("author:"+author);
+		  	console.log("title:"+title);
+		  	console.log("messcontent:"+messcontent);
+		  	if(title==""  || messcontent==""){
+		        alert("请输入标题或内容");
+		    return false;
+		    }
+		  	if(author==""){
+		        alert("请重新登录");
+		    return false;
+		    }
+		    if (title != null&&messcontent!=null) {
+		    	$.ajax({
+            type : "post",
+            url : "fm/user?action=inputmessage",
+            dataType : "json",
+            data : {
+                "title" : title,"messcontent":messcontent,"author":author
+            },
+            success : function(result) {
+                if (result.ifExist == 2) {
+                    alert("留言失败");
+                } else if (result.ifExist == 1) {
+                    alert("留言成功！");
+                    parent.location.reload();//parent.location.reload()刷新父亲对象（用于框架）
+                }else if (result.ifExist == 4) {
+                    alert("留言出错");
+                }
+            }
+        });
+		    }
+		}	
 	</script>
 
 

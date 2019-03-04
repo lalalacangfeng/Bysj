@@ -89,7 +89,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         <ul class="nav nav-second-level">
                             <li><a class="J_menuItem" href="admin/article/addarticle.jsp">写文章</a>
                             </li>
-                            <li><a class="J_menuItem" href="admin/article/articles.jsp">文章列表</a>
+                            <li><a class="J_menuItem" href="admin/article?action=findall">文章列表</a>
                             </li>
 
                         </ul>
@@ -100,10 +100,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         <ul class="nav nav-second-level">
                             <li><a class="J_menuItem" href="admin/message?action=show">留言本管理</a>
                             </li>
-                            <!-- 待定
-                            <li><a class="J_menuItem" href="admin/gonggao?action=show">公告管理</a>
+                            
+                            <li><a class="J_menuItem" href="admin/upload/gonggao?action=show">公告管理</a>
                             </li>
-                             -->
+                            
                         </ul>
                     </li>                   
                     <li>
@@ -112,7 +112,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         <ul class="nav nav-second-level">
                             <li><a class="J_menuItem" href="admin/column/addcolumn.jsp">添加栏目</a>
                             </li>
-                            <li><a class="J_menuItem" href="admin/column/columns.jsp">栏目列表</a>
+                            <li><a class="J_menuItem" href="admin/column?action=findall">栏目列表</a>
                             </li>
                         </ul>
                     </li>
