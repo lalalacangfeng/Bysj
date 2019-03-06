@@ -30,7 +30,8 @@
 									<td><c:out value="${message.title}" /></td>
 									<td><c:out value="${message.content}" /></td>
 									<td><c:out value="${message.author}" /></td>
-									<td><fmt:formatDate value="${message.releasetime}"
+									<td>
+									<fmt:formatDate value="${message.releasetime}"
 											pattern="yyyy年MM月dd日 HH时mm分ss秒" /></td>
 									<c:if test="${message.author == username}">
 										<td>

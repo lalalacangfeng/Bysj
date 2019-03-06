@@ -20,12 +20,14 @@ public class FMArticleServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
+//		int role = Integer.valueOf((String) request.getSession().getAttribute("role"));//获取权限;
+//		System.out.println("role"+role);
 		String action = request.getParameter("action");// 获取action类型
 		String servletpath = request.getServletPath();
 		String quertpath = request.getQueryString();
 		fmurl = servletpath+"?"+quertpath;
-//		System.out.println("servletpath:"+servletpath);
-//		System.out.println("quertpath:"+quertpath);
+		System.out.println("servletpath:"+servletpath);
+		System.out.println("quertpath:"+quertpath);
 		Action targetAction = null;
 		String path = null;
 		System.out.println("fmurl:"+fmurl);
@@ -36,10 +38,22 @@ public class FMArticleServlet extends HttpServlet {
 			case "show":// 显示新闻
 				targetAction = new ShowArticleAction();
 				path = targetAction.execute(request, response);
+				request.getRequestDispatcher(path).forward(request, response);
 				break;
 			case "query":
 				targetAction = new QueryArtilcleAction();
 				path = targetAction.execute(request, response);
+				request.getRequestDispatcher(path).forward(request, response);
+				break;
+			case "saveWords":
+				targetAction = new SaveWordsAction();
+				path = targetAction.execute(request, response);
+//				response.sendRedirect(path);
+				break;
+			case "saveReply":
+				targetAction = new SaveReplyAction();
+				path = targetAction.execute(request, response);
+				response.sendRedirect(path);
 				break;
 			default:
 				System.out.println("页面丢失了");
@@ -48,35 +62,37 @@ public class FMArticleServlet extends HttpServlet {
 				break;
 			}			
 		}
-		// response.sendRedirect(path);
-		request.getRequestDispatcher(path).forward(request, response);
+//		 response.sendRedirect(path);
+//		request.getRequestDispatcher(path).forward(request, response);
 	}
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		Action targetaction = null;
-		String path = null;
-		System.out.println("fmurl:"+fmurl);
-		System.out.println("request.getRequestURI():"+request.getRequestURI());
-		String serlvetpath = (String) request.getRequestURI().subSequence(17, request.getRequestURI().length()-3);
-		System.out.println("serlvetpath:"+serlvetpath);
-		if (serlvetpath!=null) {
-			switch (serlvetpath) {
-			case "saveWords":
-				targetaction = new SaveWordsAction();
-				path = targetaction.execute(request, response);
-//				request.getRequestDispatcher(fmurl).forward(request, response);
-				break;
-			case "saveReply":
-				targetaction = new SaveReplyAction();
-				break;
-			default:
-				break;
-			}			
-		}
-//		request.getRequestDispatcher(fmurl).forward(request, response);
-		response.sendRedirect(request.getContextPath()+fmurl);
+		doGet(request, response);
+//		Action targetaction = null;
+//		String path = null;
+//		System.out.println("fmurl:"+fmurl);
+//		System.out.println("request.getRequestURI():"+request.getRequestURI());
+//		String serlvetpath = (String) request.getRequestURI().subSequence(17, request.getRequestURI().length()-3);
+//		System.out.println("serlvetpath:"+serlvetpath);
+//		if (serlvetpath!=null) {
+//			switch (serlvetpath) {
+//			case "saveWords":
+//				targetaction = new SaveWordsAction();
+//				path = targetaction.execute(request, response);
+////				request.getRequestDispatcher(fmurl).forward(request, response);
+//				break;
+//			case "saveReply":
+//				targetaction = new SaveReplyAction();
+//				path=targetaction.execute(request, response);
+//				break;
+//			default:
+//				break;
+//			}			
+//		}
+////		request.getRequestDispatcher(fmurl).forward(request, response);
+//		response.sendRedirect(request.getContextPath()+fmurl);
 		
 	}
 	

@@ -14,6 +14,7 @@ public class SaveReplyAction implements Action {
 	@Override
 	public String execute(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
+		
 		String lr_for_article_id = request.getParameter("lr_for_article_id");
 		String lr_name = request.getParameter("lr_name");
 		String lr_date = request.getParameter("lr_date");
@@ -21,6 +22,10 @@ public class SaveReplyAction implements Action {
 		String lr_for_words = request.getParameter("lr_for_words");
 		String lr_for_reply = request.getParameter("lr_for_reply");
 		String lr_content = request.getParameter("lr_content");
+		if(quanxian(request)){
+			return "article?action=show&nid="+lr_for_article_id;
+		}
+		
 		Reply reply = new Reply();
 		reply.setLr_content(lr_content);
 		reply.setLr_date(lr_date);
@@ -40,7 +45,6 @@ public class SaveReplyAction implements Action {
 //					request.getRequestDispatcher("fm/article?action=show&nid="+lr_for_article_id).forward(request, response);
 				}
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}else {
@@ -49,7 +53,23 @@ public class SaveReplyAction implements Action {
 //			response.sendRedirect("fm/article?action=show&nid="+lr_for_article_id);
 //			request.getRequestDispatcher("fm/article?action=show&nid="+lr_for_article_id).forward(request, response);
 		}
-		return null;
+		return "article?action=show&nid="+lr_for_article_id;
+	}
+	
+	public Boolean quanxian(HttpServletRequest request){
+		String role = null;
+		boolean flag = false;
+		try {
+			role = request.getSession().getAttribute("role").toString();
+			if("3".equals(role)){
+				System.out.println("权限被限制了");
+				flag = true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		System.out.println("role:"+role);
+		return flag;
 	}
 
 }

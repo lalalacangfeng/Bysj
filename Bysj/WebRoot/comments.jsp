@@ -12,34 +12,18 @@
 %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
-<head>
-<base href="<%=basePath%>">
 
-<title>留言评论</title>
-
-<link rel="stylesheet" href="js/plugins/layui/css/layui.css" />
-<link rel="stylesheet" href="css/bootstrap.min.css" />
-<style>
-.modal-backdrop {
-	z-index: 0;
-}
-</style>
-</head>
-
-<body>
 	<br />
 	<br />
 	<br />
 	<div style="margin:0 4% 0 4%;">
 		<br />
 		<!-- 留言的表单 -->
-		<form class="layui-form" action="<%=basePath%>/fm/article/saveWords.do"
+		<form class="layui-form" action="<%=basePath%>/fm/article?action=saveWords&nid=${fm_article.nid}"
 			method="post">
-			<input name="lw_name" value="${sessionScope.username}" hidden="hidden" />
-			<input name="lw_date" value="<%=nowDate%>" hidden="hidden" /> <input
-				name="lw_for_article_id" value="${fm_article.nid}" hidden="hidden" />
+			<input name="lw_name" id="lw_name" value="${sessionScope.username}" hidden="hidden" />
+			<input name="lw_date" id="lw_date" value="<%=nowDate%>" hidden="hidden" /> 
+			<input name="lw_for_article_id" id="lw_for_article_id" value="${fm_article.nid}" hidden="hidden" />
 			<div class="layui-input-block" style="margin-left: 0;">
 				<textarea id="lw_content" name="lw_content" placeholder="请输入你的留言" required="required"
 					class="layui-textarea" style="height: 150px;"></textarea>
@@ -50,7 +34,8 @@
 				<c:choose>
 					<c:when test="${username != null }">
 						<!-- 用户存在 -->
-						<input type="submit" class="layui-btn" value="留言">
+						
+						<input type="button" class="layui-btn" value="留言" onclick="wordBtn()">
 					</c:when>
 					<c:otherwise>
 						请先登录
@@ -86,16 +71,13 @@
 								<!-- 回复表单默认隐藏 -->
 								<div class="replycontainer layui-hide"
 									style="margin-left: 61px;">
-									<form action="<%=basePath%>/fm/article/saveReply.do" method="post"
+									<form action="<%=basePath%>/fm/article?action=saveReply" method="post"
 										class="layui-form">
-										<input name="lr_for_article_id" id="lr_for_article_id"
-											value="${fm_article.nid}" hidden="hidden" /> <input
-											name="lr_name" id="lr_name" value="${sessionScope.username}"
-											hidden="hidden" /> <input name="lr_date" id="lr_date"
-											value="<%=nowDate%>" hidden="hidden" /> <input
-											name="lr_for_name" id="lr_for_name" value="${words.lw_name}"
-											hidden="hidden" /> <input name="lr_for_words"
-											id="lr_for_words" value="${words.lw_id}" hidden="hidden" />
+										<input name="lr_for_article_id" id="lr_for_article_id" value="${fm_article.nid}" hidden="hidden" /> 
+										<input name="lr_name" id="lr_name" value="${sessionScope.username}" hidden="hidden" /> 
+										<input name="lr_date" id="lr_date" value="<%=nowDate%>" hidden="hidden" /> 
+										<input name="lr_for_name" id="lr_for_name" value="${words.lw_name}" hidden="hidden" /> 
+										<input name="lr_for_words" id="lr_for_words" value="${words.lw_id}" hidden="hidden" />
 										<input name="lr_for_reply" id="lr_for_reply"
 											value="${reply.lr_id}" hidden="hidden" />
 										<div class="layui-form-item">
@@ -134,19 +116,14 @@
 										<!-- 回复表单默认隐藏 -->
 										<div class="replycontainer layui-hide"
 											style="margin-left: 61px;">
-											<form action="<%=basePath%>/fm/article/saveReply.do"
+											<form action="<%=basePath%>/fm/article?action=saveReply"
 												method="post" class="layui-form">
-												<input name="lr_for_article_id" id="lr_for_article_id"
-													value="${fm_article.nid}" hidden="hidden" /> <input
-													name="lr_name" id="lr_name" value="${sessionScope.name}"
-													hidden="hidden" /> <input name="lr_date" id="lr_date"
-													value="<%=nowDate%>" hidden="hidden" /> <input
-													name="lr_for_name" id="lr_for_name"
-													value="${words.lw_name}" hidden="hidden" /> <input
-													name="lr_for_words" id="lr_for_words"
-													value="${words.lw_id}" hidden="hidden" /> <input
-													name="lr_for_reply" id="lr_for_reply"
-													value="${reply.lr_id}" hidden="hidden" />
+												<input name="lr_for_article_id" id="lr_for_article_id" value="${fm_article.nid}" hidden="hidden" /> 
+												<input name="lr_name" id="lr_name" value="${sessionScope.username}" hidden="hidden" /> 
+												<input name="lr_date" id="lr_date" value="<%=nowDate%>" hidden="hidden" /> 
+												<input name="lr_for_name" id="lr_for_name" value="${words.lw_name}" hidden="hidden" /> 
+												<input name="lr_for_words" id="lr_for_words" value="${words.lw_id}" hidden="hidden" /> 
+												<input name="lr_for_reply" id="lr_for_reply" value="${reply.lr_id}" hidden="hidden" />
 												<div class="layui-form-item">
 													<textarea name="lr_content" id="lr_content" required="required" 
 														lay-verify="replyContent" placeholder="请输入回复内容"
@@ -156,8 +133,10 @@
 												</div>
 												<div class="layui-form-item">
 													<button id="replyBtn" class="layui-btn layui-btn-mini"
-														lay-submit="formReply" lay-filter="formReply">提交</button>
+												lay-submit="formReply" lay-filter="formReply">提交</button>
 												</div>
+												
+												
 											</form>
 										</div>
 									</div>
@@ -171,64 +150,4 @@
 	<br />
 	<br />
 
-	<script src="<%=basePath%>/js/jquery.min.js"></script>
-	<script src="<%=basePath%>/js/plugins/layui/layui.js"></script>
-	<script src="<%=basePath%>/js/plugins/layer/layer.min.js"></script>
-	<script type="text/javascript">
-    layui.use('element', function () {
-        var element = layui.element;
-    });
-</script>
-	<script type="text/javascript">
-    function btnReplyClick(elem) {
-        var $ = layui.jquery;
-        if($(this)){
-        }else if(!$(this)){
-            $(elem).parent('p').parent('.comment-parent').siblings('.replycontainer').toggleClass('layui-show');
-        }
-        $(elem).parent('p').parent('.comment-parent').siblings('.replycontainer').toggleClass('layui-hide');
-        if ($(elem).text() == '回复') {
-            $(elem).text('收起')
-        } else {
-            $(elem).text('回复')
-        }
-    }
-    $("#replyBtn").click(function(){
-        var lr_for_article_id = $("#lr_for_article_id").val();
-        var lr_name = $("#lr_name").val();
-        var lr_date = $("#lr_date").val();
-        var lr_for_name = $("#lr_for_name").val();
-        var lr_content = $("#lr_content").val();
-        var lr_for_words = $("#lr_for_words").val();
-        $.ajax({
-            url: '<%=basePath%>/fm/article/saveReply.do',
-				type : 'POST',
-				dataType : "json",
-				data : [ {
-					lr_for_article_id : lr_for_article_id,
-					lr_name : lr_name,
-					lr_date : lr_date,
-					lr_for_name : lr_for_name,
-					lr_content : lr_content,
-					lr_for_words : lr_for_words
-				} ],
-				success : function(result) {
-					if (result.ifExist == 2) {
-						alert("留言失败！");
-	                } else if (result.ifExist == 1) {
-						alert("留言成功！");
-	                    parent.location.reload();//parent.location.reload()刷新父亲对象（用于框架）
-	                }
-				},
-				error : function() {
-					layer.open({
-						title : '提示信息',
-						content : '出现未知错误'
-					});
-				}
-			});
-		});
-	</script>
 
-</body>
-</html>

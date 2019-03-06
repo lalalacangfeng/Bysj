@@ -38,6 +38,7 @@ public class FMLoginServlet extends HttpServlet {
 					request.getSession().setAttribute("uid", user.getUid());
 					request.getSession().setAttribute("email", user.getEmail());
 					request.getSession().setAttribute("role", user.getRole());
+					System.out.println("role:"+request.getSession().getAttribute("role"));
 					System.out.println("success");
 					response.getWriter().write("{\"ifExist\":1}");
 //					path = "../index.jsp";

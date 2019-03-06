@@ -33,7 +33,7 @@ public class MessageDaoImpl implements MessageDao {
 			message.setTitle(rs.getString(2));
 			message.setContent(rs.getString(3));
 			message.setAuthor(rs.getString(4));
-			message.setReleasetime(rs.getDate(5));
+			message.setReleasetime(rs.getTimestamp(5));
 			message.setPid(rs.getInt(6));
 			message.setUid(rs.getInt(7));			
 			messages.add(message);

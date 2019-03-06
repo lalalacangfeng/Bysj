@@ -54,7 +54,7 @@ public class FindFM implements Action {
 				request.setAttribute("fm_articles", articles);
 				path = "fm/fm.jsp";
 				System.out.println("新建fm_articles成功");
-			}else if (messages!=null&&!messages.isEmpty()) {
+			}else if (messages!=null||!messages.isEmpty()) {
 				request.setAttribute("messages", messages);
 				path = "fm/messages.jsp";
 				System.out.println("新建messages成功");

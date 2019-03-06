@@ -43,7 +43,13 @@ public class LoginFilter implements Filter {
 				request.getRequestDispatcher("login.jsp")
 				.forward(request, response);
 			} else {
-				chain.doFilter(req, res);
+				if(quanxian(request)){
+					chain.doFilter(req, res);					
+				}else {
+					request.setAttribute("status", "权限不够");
+					request.getRequestDispatcher("login.jsp")
+					.forward(request, response);
+				}
 			}
 //		}
 	}
@@ -52,6 +58,22 @@ public class LoginFilter implements Filter {
 		//通过filterConfig获得初始化中过滤器名称
 		filterName = filterConfig.getFilterName();
 		log.debug("获得过滤名称");
+	}
+	
+	public Boolean quanxian(HttpServletRequest request){
+		String role = null;
+		boolean flag = false;
+		try {
+			role = request.getSession().getAttribute("role").toString();
+			if("0".equals(role)){
+				System.out.println("管理员登录");
+				flag = true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		System.out.println("role:"+role);
+		return flag;
 	}
 
 }

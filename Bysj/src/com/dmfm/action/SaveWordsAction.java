@@ -14,10 +14,14 @@ public class SaveWordsAction implements Action {
 	@Override
 	public String execute(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
+		
 		String lw_name = request.getParameter("lw_name");
 		String lw_date = request.getParameter("lw_date");
 		String lw_for_article_id = request.getParameter("lw_for_article_id");
 		String lw_content = request.getParameter("lw_content");
+		if(quanxian(request)){
+			return "article?action=show&nid="+lw_for_article_id;
+		}
 		Words words = new Words();
 		words.setLw_name(lw_name);
 		words.setLw_date(lw_date);
@@ -50,6 +54,23 @@ public class SaveWordsAction implements Action {
 //			request.getRequestDispatcher("fm/article?action=show&nid="+lw_for_article_id).forward(request, response);
 		}
 		return null;
+//		return "article?action=show&nid="+lw_for_article_id;
+	}
+	
+	public Boolean quanxian(HttpServletRequest request){
+		String role = null;
+		boolean flag = false;
+		try {
+			role = request.getSession().getAttribute("role").toString();
+			if("3".equals(role)){
+				System.out.println("权限被限制了");
+				flag = true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		System.out.println("role:"+role);
+		return flag;
 	}
 
 }
